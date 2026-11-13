@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 180" fill="none">
+  <rect width="360" height="180" rx="18" fill="#0F6E7A"/>
+  <circle cx="66" cy="90" r="38" fill="#E6F4F6"/>
+  <path d="M66 62 C66 62 44 88 44 103 C44 115.15 53.85 125 66 125 C78.15 125 88 115.15 88 103 C88 88 66 62 66 62 Z" fill="#0284C7"/>
+  <path d="M56 105 Q66 115 76 100" stroke="#BAE6FD" stroke-width="4" stroke-linecap="round" fill="none"/>
+  <text x="122" y="84" fill="#FFFFFF" font-family="'Plus Jakarta Sans', Arial, sans-serif" font-weight="800" font-size="38" letter-spacing="1.5">TECNO</text>
+  <text x="122" y="124" fill="#BAE6FD" font-family="'Plus Jakarta Sans', Arial, sans-serif" font-weight="800" font-size="38" letter-spacing="2.5">AGUA</text>
+</svg>

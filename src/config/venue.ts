@@ -128,16 +128,16 @@ export const STAND_TYPE_META: Record<
     dimensionsLabel: '2,50 m × 3,00 m = 7,50 m²',
     areaM2: 7.5,
     priceUsd: 480,
-    officialNote: 'Pared inferior de entrada (Stands 01 al 09) · $480 a Tasa BCV€',
+    officialNote: 'Pared inferior de entrada (Stands 01 al 08) · $480 a Tasa BCV€',
   },
   turquesa: {
     label: 'Salón Exposición · Tipo Turquesa (5,00 m²)',
     shortLabel: 'Turquesa 5,00 m² ($400)',
-    color: '#1995A2',
+    color: '#4DA1A9',
     dimensionsLabel: '2,50 m × 2,00 m = 5,00 m²',
     areaM2: 5.0,
     priceUsd: 400,
-    officialNote: 'Islas dobles centrales y pared superior (Stands 10 al 51) · $400 a Tasa BCV€',
+    officialNote: '4 islas centrales de 6 módulos (09 al 32) y pared norte (33 al 41) · $400 a Tasa BCV€',
   },
   expoauto_100: {
     label: 'Expoauto · Verde Claro (100 m²)',
@@ -212,30 +212,68 @@ export const STAND_STATUS_META: Record<
 };
 
 /**
- * Generates the exact 51 stands of the Salón de Exposiciones (01 to 51)
- * plus the 8 official vehicle exhibition spaces of Expoauto (EA-01 to EA-08)
- * matching the exact pattern and numbering in the Cenexpo PDFs.
+ * Generates the exact 41 stands of the updated Salón de Exposiciones planimetry (01 to 41):
+ * - 8 Rosado stands (01 to 08) along the bottom entrance wall (2.5m x 3.0m = 7.50 m²)
+ * - 24 Turquesa stands (09 to 32) arranged in 4 central 3x2 islands with a central vertical aisle
+ * - 9 Turquesa stands (33 to 41) along the North wall (left to right: 41 down to 33)
+ * plus the 8 official vehicle exhibition spaces of Expoauto (EA-01 to EA-08).
  */
 export function generateInitialStands(): StandRecord[] {
   const stands: StandRecord[] = [];
   const pad = (n: number) => String(n).padStart(2, '0');
 
+  // Exact stand assignments from the official Salón de Exposiciones planimetry:
+  // Bloque principal (Sector Rosado 01–08):
+  // - Stands 01 y 02: BISA
+  // - Stands 03 y 04: Agrollano
+  // - Stands 05 y 06: WOW (Wao)
+  // - Stands 07 y 08: Helados La Cascada
+  // Islas inferiores (Lado de La Cascada / Sector Turquesa 09–20):
+  // - Stands 13, 14, 15 y 16: Banco Sofitasa
+  // - Stand 17: Agro Insumos del Táchira
+  // - Stand 12: Aldefrio (Al de Frío)
+  // - Stand 18: Agrinova
+  // - Stand 11: AgroMarket (El suyo / Presentador Digital)
+  // - Stand 20: Tecnoagua (Tecno Agua)
+  // - Stand 09: Inarvet / Narbhed (Por confirmar -> estado reservado)
+  const confirmedExhibitorsByStandCode: Record<string, string> = {
+    '01': 'org-bisa',
+    '02': 'org-bisa',
+    '03': 'org-agrollano',
+    '04': 'org-agrollano',
+    '05': 'org-wow',
+    '06': 'org-wow',
+    '07': 'org-helados-la-cascada',
+    '08': 'org-helados-la-cascada',
+    '11': 'org-agromarket',
+    '12': 'org-aldefrio',
+    '13': 'org-sofitasa',
+    '14': 'org-sofitasa',
+    '15': 'org-sofitasa',
+    '16': 'org-sofitasa',
+    '17': 'org-agro-insumos-tachira',
+    '18': 'org-agrinova',
+    '20': 'org-tecno-agua',
+  };
+
+  // Stands pre-assigned as "Por confirmar" (Reservado)
+  const pendingExhibitorsByStandCode: Record<string, { exhibitorId: string; holdUntil: string }> = {
+    '09': {
+      exhibitorId: 'org-inarvet',
+      holdUntil: '2026-11-23T23:59:59.000Z',
+    },
+  };
+
   // ---------------------------------------------------------------------------
-  // A. SALÓN DE EXPOSICIONES: 51 STANDS (Codes "01" through "51")
+  // A. SALÓN DE EXPOSICIONES: 41 STANDS (Codes "01" through "41")
   // Coordinate system: x from 0 to 38.0 m (left to right), z from 0 to 21.5 m (top to bottom)
   // ---------------------------------------------------------------------------
 
-  // 1. Bottom Wall Row: Stands 01 to 09 (Left to Right, Rosado 2.5m x 3.0m = 7.50 m², $480)
-  // Flagship entrance stands 01, 02, and 03 are assigned to the confirmed Grand Official Sponsors & Digital Presenter
-  const flagshipSponsorsByCode: Record<string, string> = {
-    '01': 'org-sofitasa',
-    '02': 'org-bisa',
-    '03': 'org-agromarket',
-  };
-  for (let i = 1; i <= 9; i++) {
+  // 1. Bottom Wall Row: Stands 01 to 08 (Left to Right, Rosado 2.5m x 3.0m = 7.50 m², $480)
+  for (let i = 1; i <= 8; i++) {
     const code = pad(i);
-    const x = (i - 1) * 2.5; // x from 0.0 to 20.0 (total span 22.5m)
-    const sponsorId = flagshipSponsorsByCode[code] ?? null;
+    const x = (i - 1) * 2.5; // x from 0.0 to 17.5 (total span 20.0m, ends at x=20.0)
+    const sponsorId = confirmedExhibitorsByStandCode[code] ?? null;
     stands.push({
       id: `stand-${code}`,
       code,
@@ -249,123 +287,68 @@ export function generateInitialStands(): StandRecord[] {
       facing: '-z', // faces up toward the main entrance aisle
       type: 'rosado',
       price_usd: 480,
-      location_label: 'Pared inferior de entrada (Salón de Exposiciones)',
+      location_label: 'Pared inferior de entrada · Sector Rosado (Salón de Exposiciones)',
       status: sponsorId ? 'vendido' : 'disponible',
       hold_until: null,
       exhibitor_id: sponsorId,
     });
   }
 
-  // 2. Lower Double Island (Isla B) - Bottom Row: 8 stands from left to right
-  // Position 5 in Isla B (N° 14 in PDF) carries code "B05" so both the Casino Militar 51-stand pattern
-  // and the B05 stand request / admin confirmation workflow operate on the exact same planimetry.
-  const lowerIslandBottomRow = ['17', '16', '15', 'B05', '13', '12', '11', '10'];
-  lowerIslandBottomRow.forEach((rawCode, idx) => {
-    const code = rawCode;
-    const x = 2.5 + idx * 2.5; // x from 2.5 to 20.0 (total span 20.0m, ends at x=22.5)
-    stands.push({
-      id: `stand-${code.toLowerCase()}`,
-      code,
-      zone_id: 'zone-exposicion',
-      x,
-      z: 12.5, // z from 12.5 to 14.5
-      width: 2.5,
-      depth: 2.0,
-      area_m2: 5.0,
-      rotation: Math.PI,
-      facing: '+z', // faces down toward stands 01–09
-      type: 'turquesa',
-      price_usd: 400,
-      location_label:
-        code === 'B05'
-          ? 'Isla central B · Fila sur (Stand B05 / N° 14 · Salón de Exposiciones)'
-          : 'Isla central B · Fila sur (Salón de Exposiciones)',
-      status: 'disponible',
-      hold_until: null,
-      exhibitor_id: null,
+  // Helper to push a 3-column row of Turquesa stands (2.5m x 2.0m = 5.00 m², $400)
+  const addIslandRow = (
+    nums: number[],
+    startX: number,
+    z: number,
+    facing: StandFacing,
+    locationLabel: string
+  ) => {
+    nums.forEach((num, idx) => {
+      const code = pad(num);
+      const x = startX + idx * 2.5;
+      const sponsorId = confirmedExhibitorsByStandCode[code] ?? null;
+      const pendingInfo = pendingExhibitorsByStandCode[code] ?? null;
+      stands.push({
+        id: `stand-${code}`,
+        code,
+        zone_id: 'zone-exposicion',
+        x,
+        z,
+        width: 2.5,
+        depth: 2.0,
+        area_m2: 5.0,
+        rotation: facing === '+z' ? Math.PI : 0,
+        facing,
+        type: 'turquesa',
+        price_usd: 400,
+        location_label: locationLabel,
+        status: sponsorId ? 'vendido' : pendingInfo ? 'reservado' : 'disponible',
+        hold_until: pendingInfo ? pendingInfo.holdUntil : null,
+        exhibitor_id: sponsorId ?? (pendingInfo ? pendingInfo.exhibitorId : null),
+      });
     });
-  });
+  };
 
-  // 3. Lower Double Island - Top Row: Stands 25 down to 18 (Left to Right: 25, 24, 23, 22, 21, 20, 19, 18)
-  const lowerIslandTopRow = [25, 24, 23, 22, 21, 20, 19, 18];
-  lowerIslandTopRow.forEach((num, idx) => {
-    const code = pad(num);
-    const x = 2.5 + idx * 2.5;
-    stands.push({
-      id: `stand-${code}`,
-      code,
-      zone_id: 'zone-exposicion',
-      x,
-      z: 10.5, // z from 10.5 to 12.5
-      width: 2.5,
-      depth: 2.0,
-      area_m2: 5.0,
-      rotation: 0,
-      facing: '-z', // faces up toward central aisle
-      type: 'turquesa',
-      price_usd: 400,
-      location_label: 'Isla central inferior · Fila norte (Salón de Exposiciones)',
-      status: 'disponible',
-      hold_until: null,
-      exhibitor_id: null,
-    });
-  });
+  // 2. Bottom-Left Island (6 stands: bottom row 14, 13, 12; top row 15, 16, 17; x = 3.0 to 10.5m)
+  addIslandRow([14, 13, 12], 3.0, 12.5, '+z', 'Isla Sur-Oeste · Fila inferior (Stands 12–14)');
+  addIslandRow([15, 16, 17], 3.0, 10.5, '-z', 'Isla Sur-Oeste · Fila superior (Stands 15–17)');
 
-  // 4. Upper Double Island - Bottom Row: Stands 33 down to 26 (Left to Right: 33, 32, 31, 30, 29, 28, 27, 26)
-  const upperIslandBottomRow = [33, 32, 31, 30, 29, 28, 27, 26];
-  upperIslandBottomRow.forEach((num, idx) => {
-    const code = pad(num);
-    const x = 2.5 + idx * 2.5;
-    stands.push({
-      id: `stand-${code}`,
-      code,
-      zone_id: 'zone-exposicion',
-      x,
-      z: 6.5, // z from 6.5 to 8.5
-      width: 2.5,
-      depth: 2.0,
-      area_m2: 5.0,
-      rotation: Math.PI,
-      facing: '+z', // faces down toward central aisle
-      type: 'turquesa',
-      price_usd: 400,
-      location_label: 'Isla central superior · Fila sur (Salón de Exposiciones)',
-      status: 'disponible',
-      hold_until: null,
-      exhibitor_id: null,
-    });
-  });
+  // 3. Bottom-Right Island (6 stands: bottom row 11, 10, 09; top row 18, 19, 20; x = 14.5 to 22.0m)
+  addIslandRow([11, 10, 9], 14.5, 12.5, '+z', 'Isla Sur-Este · Fila inferior (Stands 09–11)');
+  addIslandRow([18, 19, 20], 14.5, 10.5, '-z', 'Isla Sur-Este · Fila superior (Stands 18–20)');
 
-  // 5. Upper Double Island - Top Row: Stands 34 up to 41 (Left to Right: 34, 35, 36, 37, 38, 39, 40, 41)
-  const upperIslandTopRow = [34, 35, 36, 37, 38, 39, 40, 41];
-  upperIslandTopRow.forEach((num, idx) => {
-    const code = pad(num);
-    const x = 2.5 + idx * 2.5;
-    stands.push({
-      id: `stand-${code}`,
-      code,
-      zone_id: 'zone-exposicion',
-      x,
-      z: 4.5, // z from 4.5 to 6.5
-      width: 2.5,
-      depth: 2.0,
-      area_m2: 5.0,
-      rotation: 0,
-      facing: '-z', // faces up toward top aisle
-      type: 'turquesa',
-      price_usd: 400,
-      location_label: 'Isla central superior · Fila norte (Salón de Exposiciones)',
-      status: 'disponible',
-      hold_until: null,
-      exhibitor_id: null,
-    });
-  });
+  // 4. Top-Left Island (6 stands: bottom row 26, 25, 24; top row 27, 28, 29; x = 3.0 to 10.5m)
+  addIslandRow([26, 25, 24], 3.0, 6.5, '+z', 'Isla Nor-Oeste · Fila inferior (Stands 24–26)');
+  addIslandRow([27, 28, 29], 3.0, 4.5, '-z', 'Isla Nor-Oeste · Fila superior (Stands 27–29)');
 
-  // 6. Top Wall Row: Stands 51 down to 42 (Left to Right: 51, 50, 49, 48, 47, 46, 45, 44, 43, 42)
-  const topWallRow = [51, 50, 49, 48, 47, 46, 45, 44, 43, 42];
+  // 5. Top-Right Island (6 stands: bottom row 23, 22, 21; top row 30, 31, 32; x = 14.5 to 22.0m)
+  addIslandRow([23, 22, 21], 14.5, 6.5, '+z', 'Isla Nor-Este · Fila inferior (Stands 21–23)');
+  addIslandRow([30, 31, 32], 14.5, 4.5, '-z', 'Isla Nor-Este · Fila superior (Stands 30–32)');
+
+  // 6. Top Wall Row: 9 Turquesa stands 41 down to 33 (Left to Right: 41, 40, 39, 38, 37, 36, 35, 34, 33)
+  const topWallRow = [41, 40, 39, 38, 37, 36, 35, 34, 33];
   topWallRow.forEach((num, idx) => {
     const code = pad(num);
-    const x = idx * 2.5; // x from 0.0 to 22.5 (total span 25.0m)
+    const x = idx * 2.5; // x from 0.0 to 20.0 (total span 22.5m)
     stands.push({
       id: `stand-${code}`,
       code,
@@ -379,7 +362,7 @@ export function generateInitialStands(): StandRecord[] {
       facing: '+z', // faces down toward top aisle
       type: 'turquesa',
       price_usd: 400,
-      location_label: 'Pared superior norte (Salón de Exposiciones)',
+      location_label: 'Pared superior norte (Stands 33–41 · Salón de Exposiciones)',
       status: 'disponible',
       hold_until: null,
       exhibitor_id: null,

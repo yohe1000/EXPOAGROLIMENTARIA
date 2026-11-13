@@ -864,10 +864,10 @@ export const Maquette3DCanvas: React.FC<Maquette3DCanvasProps> = ({
     stageDeck.position.set(sbWorldX, 0.35, sbWorldZ);
     hallGroup.add(stageDeck);
 
-    // Show Bisnet LED Backdrop Screen & Truss Frame
+    // Conferencias LED Backdrop Screen & Truss Frame
     const ledBannerTex = createBannerTexture(
-      'TARIMA SHOW BISNET',
-      '6,50 × 18,50 m (120,25 m²) · PONENCIAS Y SHOW DE MARCAS',
+      'CONFERENCIAS · SALÓN DE EXPOSICIONES',
+      '6,50 × 18,50 m (120,25 m²) · PONENCIAS Y RUEDA DE NEGOCIOS',
       '#0F3D22',
       '#FFFFFF',
       '#F4C20D',
@@ -1628,7 +1628,7 @@ export const Maquette3DCanvas: React.FC<Maquette3DCanvasProps> = ({
                 })}
               </div>
               <span className="text-[#F4C20D] font-semibold">
-                Toca cualquier stand (01–51, B05 o EA-01..08) para abrir su ficha
+                Toca cualquier stand (01–41 o EA-01..08) para abrir su ficha
               </span>
             </div>
           </div>

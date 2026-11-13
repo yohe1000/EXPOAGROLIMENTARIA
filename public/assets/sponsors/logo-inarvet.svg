@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 180" fill="none">
+  <rect width="360" height="180" rx="18" fill="#2E6F77"/>
+  <rect x="8" y="8" width="344" height="164" rx="12" stroke="#88C5CC" stroke-width="2" stroke-dasharray="6 4"/>
+  <text x="180" y="82" text-anchor="middle" fill="#FFFFFF" font-family="'Plus Jakarta Sans', Arial, sans-serif" font-weight="800" font-size="34" letter-spacing="2">INARVET</text>
+  <text x="180" y="116" text-anchor="middle" fill="#D5F2F5" font-family="'Plus Jakarta Sans', Arial, sans-serif" font-weight="700" font-size="22" letter-spacing="3">NARBHED</text>
+  <rect x="95" y="130" width="170" height="26" rx="13" fill="#E8A317"/>
+  <text x="180" y="147" text-anchor="middle" fill="#1F2937" font-family="'Plus Jakarta Sans', Arial, sans-serif" font-weight="800" font-size="12" letter-spacing="1">POR CONFIRMAR</text>
+</svg>

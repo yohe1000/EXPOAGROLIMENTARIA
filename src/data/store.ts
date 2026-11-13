@@ -21,20 +21,20 @@ import {
 import { StandRecord, getEffectiveStandStatus, StandStatus, STAND_TYPE_META, STAND_STATUS_META } from '../config/venue';
 
 const STORAGE_KEYS = {
-  EVENT_CONFIG: 'expo_lg26_event_config_v4',
-  ZONES: 'expo_lg26_zones_v4',
-  STANDS: 'expo_lg26_stands_v4',
-  STAND_REQUESTS: 'expo_lg26_stand_requests_v4',
-  B2B_REGISTRATIONS: 'expo_lg26_b2b_registrations_v4',
-  EXHIBITORS: 'expo_lg26_exhibitors_v4',
-  BOLSA_PRICES: 'expo_lg26_bolsa_prices_v4',
-  AGENDA: 'expo_lg26_agenda_v4',
-  VISITORS: 'expo_lg26_visitors_v4',
-  PROFILES: 'expo_lg26_profiles_v4',
-  AUTH_SESSION: 'expo_lg26_auth_session_v4',
-  AUDIT_LOGS: 'expo_lg26_audit_logs_v4',
-  RATE_LIMITS: 'expo_lg26_rate_limits_v4',
-  LAST_PASS_TOKEN: 'expo_lg26_last_pass_token_v4',
+  EVENT_CONFIG: 'expo_lg26_event_config_v6',
+  ZONES: 'expo_lg26_zones_v6',
+  STANDS: 'expo_lg26_stands_v6',
+  STAND_REQUESTS: 'expo_lg26_stand_requests_v6',
+  B2B_REGISTRATIONS: 'expo_lg26_b2b_registrations_v6',
+  EXHIBITORS: 'expo_lg26_exhibitors_v6',
+  BOLSA_PRICES: 'expo_lg26_bolsa_prices_v6',
+  AGENDA: 'expo_lg26_agenda_v6',
+  VISITORS: 'expo_lg26_visitors_v6',
+  PROFILES: 'expo_lg26_profiles_v6',
+  AUTH_SESSION: 'expo_lg26_auth_session_v6',
+  AUDIT_LOGS: 'expo_lg26_audit_logs_v6',
+  RATE_LIMITS: 'expo_lg26_rate_limits_v6',
+  LAST_PASS_TOKEN: 'expo_lg26_last_pass_token_v6',
 };
 
 export interface PublicStandView extends Omit<StandRecord, 'price_usd' | 'status'> {
@@ -337,8 +337,8 @@ export function getStandsRaw(): StandRecord[] {
 export function getStandsPublic(nowMs: number = Date.now()): PublicStandView[] {
   const config = getEventConfig();
   const stands = getStandsRaw();
-  const confirmedExhibitors = getConfirmedExhibitors();
-  const exhibitorMap = new Map(confirmedExhibitors.map((e) => [e.id, e]));
+  const activeExhibitors = getExhibitors().filter((e) => e.status !== 'retirado');
+  const exhibitorMap = new Map(activeExhibitors.map((e) => [e.id, e]));
 
   return stands.map((s) => {
     const effective_status = getEffectiveStandStatus(s, nowMs);
@@ -478,7 +478,8 @@ export function createStandRequest(
     throw new Error(sec.message || 'Solicitud bloqueada.');
   }
 
-  const normalizedCode = input.stand_code.trim().toUpperCase();
+  const rawCode = input.stand_code.trim().toUpperCase();
+  const normalizedCode = rawCode === 'B05' ? '19' : rawCode;
   const stands = getStandsRaw();
   const standIndex = stands.findIndex((s) => s.code.toUpperCase() === normalizedCode);
 

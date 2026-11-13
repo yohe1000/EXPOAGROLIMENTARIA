@@ -144,7 +144,7 @@ export const StandPlan2D: React.FC<StandPlan2DProps> = ({
               Maqueta 3D y Planimetría · El Casino Militar de La Grita
             </span>
             <span className="rounded-[4px] bg-[#1E7A34]/15 px-2.5 py-0.5 text-scale-14 font-semibold text-[#0F3D22]">
-              51 Stands Salón + 8 Zonas Expoauto
+              41 Stands Salón + 8 Zonas Expoauto
             </span>
             <span className="inline-flex items-center gap-1.5 rounded-[4px] border border-[#1E7A34]/30 bg-[#EAF5EC] px-2.5 py-0.5 text-[12px] font-bold text-[#0F3D22]">
               <span className="h-2 w-2 rounded-full bg-[#1E7A34]" aria-hidden="true" />
@@ -152,9 +152,9 @@ export const StandPlan2D: React.FC<StandPlan2DProps> = ({
             </span>
           </div>
           <p className="mt-1 text-scale-14 text-[#1F2421]/80">
-            Patrón exacto y medidas oficiales de Cenexpo C.A. a Tasa BCV: Stands Rosados de{' '}
-            <strong>2,5 × 3,0 m = 7,50 m² ($480)</strong>, Stands Turquesa de{' '}
-            <strong>2,5 × 2,0 m = 5,00 m² ($400)</strong> y 8 Zonas de Expoauto de{' '}
+            Planimetría oficial actualizada del Salón de Exposiciones a Tasa BCV€: 8 Stands Rosados de{' '}
+            <strong>2,5 × 3,0 m = 7,50 m² ($480)</strong> (01 al 08), 33 Stands Turquesa de{' '}
+            <strong>2,5 × 2,0 m = 5,00 m² ($400)</strong> (09 al 41) y 8 Zonas de Expoauto de{' '}
             <strong>100 m² ($1.600) a 170 m² ($2.100)</strong>.
           </p>
         </div>
@@ -186,7 +186,7 @@ export const StandPlan2D: React.FC<StandPlan2DProps> = ({
             }`}
           >
             <MapIcon className="h-4 w-4" aria-hidden="true" />
-            Plano 2D Salón (51)
+            Plano 2D Salón (41)
           </button>
 
           <button
@@ -242,7 +242,7 @@ export const StandPlan2D: React.FC<StandPlan2DProps> = ({
       <div className="mt-4 grid grid-cols-1 gap-3 md:grid-cols-12">
         <div className="md:col-span-4">
           <label htmlFor="stand-search" className="sr-only">
-            Buscar stand por número o zona
+            Buscar stand por número, marca o zona
           </label>
           <div className="relative">
             <Search
@@ -254,7 +254,7 @@ export const StandPlan2D: React.FC<StandPlan2DProps> = ({
               type="search"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Buscar stand (ej. 01, B05, 25, EA-01)..."
+              placeholder="Buscar stand o marca (ej. 01, Bisa, Sofitasa, Agrollano, AgroMarket)..."
               className="w-full min-h-[44px] rounded-[4px] border border-[#1F2421]/25 bg-[#EEF2EF]/60 pl-9 pr-3 py-2 text-scale-14 text-[#1F2421] placeholder:text-[#1F2421]/60 focus:border-[#1F4E9C] focus:bg-white"
             />
           </div>
@@ -270,10 +270,10 @@ export const StandPlan2D: React.FC<StandPlan2DProps> = ({
             onChange={(e) => setStatusFilter(e.target.value as StandStatus | 'todos')}
             className="w-full min-h-[44px] rounded-[4px] border border-[#1F2421]/25 bg-[#EEF2EF]/60 px-3 py-2 text-scale-14 text-[#1F2421] focus:border-[#1F4E9C] focus:bg-white"
           >
-            <option value="todos">Todos los estados (59 espacios)</option>
+            <option value="todos">Todos los estados ({stands.length} espacios)</option>
             <option value="disponible">Disponible ({statusCounts.disponible})</option>
-            <option value="reservado">Reservado ({statusCounts.reservado})</option>
-            <option value="vendido">Vendido ({statusCounts.vendido})</option>
+            <option value="reservado">Reservado / Por confirmar ({statusCounts.reservado})</option>
+            <option value="vendido">Vendido / Confirmado ({statusCounts.vendido})</option>
             <option value="bloqueado">Bloqueado ({statusCounts.bloqueado})</option>
           </select>
         </div>
@@ -289,8 +289,8 @@ export const StandPlan2D: React.FC<StandPlan2DProps> = ({
             className="w-full min-h-[44px] rounded-[4px] border border-[#1F2421]/25 bg-[#EEF2EF]/60 px-3 py-2 text-scale-14 text-[#1F2421] focus:border-[#1F4E9C] focus:bg-white"
           >
             <option value="todos">Todas las medidas y tarifas (Tasa BCV)</option>
-            <option value="rosado">Salón Rosado: 2,5 × 3 m = 7,50 m² · $480 (9 stands: 01–09)</option>
-            <option value="turquesa">Salón Turquesa: 2,5 × 2 m = 5,00 m² · $400 (42 stands: 10–51)</option>
+            <option value="rosado">Salón Rosado: 2,5 × 3 m = 7,50 m² · $480 (8 stands: 01–08)</option>
+            <option value="turquesa">Salón Turquesa: 2,5 × 2 m = 5,00 m² · $400 (33 stands: 09–41)</option>
             <option value="expoauto_100">Expoauto Verde: 100 m² · $1.600 (Zonas 2, 3, 4 y 5)</option>
             <option value="expoauto_110">Expoauto Rosado: 110 m² · $1.750 (Zona 6)</option>
             <option value="expoauto_140">Expoauto Naranja: 140 m² · $1.950 (Zona 7)</option>
@@ -327,24 +327,24 @@ export const StandPlan2D: React.FC<StandPlan2DProps> = ({
 
           {activePlanTab === 'salon' && (
             <div className="rounded-[12px] border border-[#1F2421]/15 bg-[#EEF2EF] p-3 sm:p-4">
-              {/* Top Pricing Header Strip matching Page 5 of PABELLON_AGROALIENTARIO.pdf */}
+              {/* Top Pricing Header Strip matching the official Planimetría del Salón de Exposiciones */}
               <div className="mb-3 flex flex-wrap items-center justify-between gap-3 rounded-[8px] border border-[#1F2421]/15 bg-white px-3.5 py-2.5">
                 <div className="flex flex-wrap items-center gap-4">
                   <div className="flex items-center gap-2">
                     <span className="h-6 w-8 rounded-[3px] border border-[#1F2421]/40 bg-[#F5B7B8] shrink-0" />
                     <div className="text-[13px] leading-tight">
-                      <span className="font-bold text-[#1F2421]">2,5 × 3 m = 7,50 m²</span>
+                      <span className="font-bold text-[#1F2421]">2,5 × 3 = 7,50 m²</span>
                       <span className="ml-1.5 font-display-wide text-[#0F3D22]">480 $</span>
-                      <span className="block text-[11px] text-[#1F2421]/70">Stands 01 al 09 (Pared entrada)</span>
+                      <span className="block text-[11px] text-[#1F2421]/70">Bloque Principal: Stands 01 al 08</span>
                     </div>
                   </div>
 
                   <div className="flex items-center gap-2">
-                    <span className="h-6 w-8 rounded-[3px] border border-[#1F2421]/40 bg-[#1995A2] shrink-0" />
+                    <span className="h-6 w-8 rounded-[3px] border border-[#1F2421]/40 bg-[#4DA1A9] shrink-0" />
                     <div className="text-[13px] leading-tight">
-                      <span className="font-bold text-[#1F2421]">2,5 × 2 m = 5,00 m²</span>
+                      <span className="font-bold text-[#1F2421]">2,5 × 2 = 5,00 m²</span>
                       <span className="ml-1.5 font-display-wide text-[#0F3D22]">400 $</span>
-                      <span className="block text-[11px] text-[#1F2421]/70">Stands 10 al 51 (Islas y pared norte)</span>
+                      <span className="block text-[11px] text-[#1F2421]/70">4 Islas centrales (09–32) y Pared norte (33–41)</span>
                     </div>
                   </div>
                 </div>
@@ -360,7 +360,7 @@ export const StandPlan2D: React.FC<StandPlan2DProps> = ({
                   viewBox={`-115 -24 ${SVG_W + 205} ${SVG_H + 54}`}
                   className="mx-auto w-full min-w-[660px] h-auto select-none"
                   role="img"
-                  aria-label="Planimetría exacta del Salón de Exposiciones del Casino Militar de La Grita con 51 stands del 01 al 51, 7 mesas y tarima Show Bisnet"
+                  aria-label="Planimetría oficial del Salón de Exposiciones del Casino Militar de La Grita con 41 stands del 01 al 41, marcas asignadas, 7 mesas y área de Conferencias"
                 >
                   {/* Outer Architectural Frame */}
                   <rect
@@ -379,21 +379,21 @@ export const StandPlan2D: React.FC<StandPlan2DProps> = ({
                     y={0}
                     width={SVG_W}
                     height={SVG_H}
-                    fill="#EEF1F4"
+                    fill="#EAE7E2"
                     stroke="#2B2E1E"
                     strokeWidth={4}
                   />
 
-                  {/* Dimension Callout Top: 38,00 m total length (25,0 m stands + 6,5 m mesas + 6,5 m Show Bisnet) */}
+                  {/* Dimension Callout Top */}
                   <text
-                    x={12.5 * SCALE}
+                    x={11.5 * SCALE}
                     y={-13}
                     textAnchor="middle"
                     fill="#0F3D22"
                     fontSize="11"
                     fontWeight="700"
                   >
-                    ◄──── ZONA DE 51 STANDS: 25,00 m (10 módulos × 2,50 m) ────►
+                    ◄──── SALÓN DE EXPOSICIONES: 41 STANDS (01 AL 41) · ISLAS Y BLOQUE PRINCIPAL ────►
                   </text>
                   <text
                     x={31.5 * SCALE}
@@ -403,18 +403,18 @@ export const StandPlan2D: React.FC<StandPlan2DProps> = ({
                     fontSize="11"
                     fontWeight="700"
                   >
-                    ◄── MESAS Y SHOW BISNET: 13,00 m ──►
+                    ◄── MESAS Y CONFERENCIAS: 13,00 m ──►
                   </text>
 
-                  {/* Left Entrance / Exit Opening (between Stand 17 and Stand 01, z = 15.0m to 18.2m) */}
+                  {/* Left Entrance / Exit Opening (between Stand 14 and Stand 01, z = 15.0m to 18.2m) */}
                   <rect
                     x={-8}
                     y={15.0 * SCALE}
                     width={16}
                     height={3.2 * SCALE}
-                    fill="#EEF1F4"
+                    fill="#EAE7E2"
                   />
-                  {/* Double Entry/Exit Arrows matching the official PDF */}
+                  {/* Double Entry/Exit Arrows matching the official planimetry */}
                   <g transform={`translate(-98, ${15.4 * SCALE})`}>
                     <polygon points="0,10 24,0 24,6 68,6 68,14 24,14 24,20" fill="#1F2421" />
                     <polygon points="68,34 44,24 44,30 0,30 0,38 44,38 44,44" fill="#1F2421" />
@@ -426,7 +426,7 @@ export const StandPlan2D: React.FC<StandPlan2DProps> = ({
                     </text>
                   </g>
 
-                  {/* Right Side: SHOW BISNET Stage (x = 31.5m to 38.0m, z = 0 to 18.5m) */}
+                  {/* Right Side: CONFERENCIAS Stage (x = 31.5m to 38.0m, z = 0 to 18.5m) */}
                   <g>
                     <rect
                       x={31.5 * SCALE}
@@ -437,7 +437,6 @@ export const StandPlan2D: React.FC<StandPlan2DProps> = ({
                       stroke="#1F2421"
                       strokeWidth={1.5}
                     />
-                    {/* Stage front step line */}
                     <line
                       x1={31.8 * SCALE}
                       y1={0.2 * SCALE}
@@ -446,7 +445,6 @@ export const StandPlan2D: React.FC<StandPlan2DProps> = ({
                       stroke="#1F2421"
                       strokeWidth={1}
                     />
-                    {/* Backstage screen bar */}
                     <rect
                       x={37.2 * SCALE}
                       y={6.2 * SCALE}
@@ -458,37 +456,27 @@ export const StandPlan2D: React.FC<StandPlan2DProps> = ({
                     />
                     <text
                       x={34.6 * SCALE}
-                      y={9.2 * SCALE}
+                      y={9.8 * SCALE}
                       textAnchor="middle"
                       fill="#1F2421"
-                      fontSize="16"
+                      fontSize="14.5"
                       fontWeight="800"
                     >
-                      SHOW
+                      CONFERENCIAS
                     </text>
                     <text
                       x={34.6 * SCALE}
-                      y={10.2 * SCALE}
-                      textAnchor="middle"
-                      fill="#1F2421"
-                      fontSize="16"
-                      fontWeight="800"
-                    >
-                      BISNET
-                    </text>
-                    <text
-                      x={34.6 * SCALE}
-                      y={11.2 * SCALE}
+                      y={11.0 * SCALE}
                       textAnchor="middle"
                       fill="#1F2421"
                       fillOpacity={0.7}
-                      fontSize="10.5"
+                      fontSize="10"
                       fontWeight="700"
                     >
                       (6,5 × 18,5 m = 120 m²)
                     </text>
 
-                    {/* Bottom-right stairs below Show Bisnet */}
+                    {/* Bottom-right stairs below Conferencias */}
                     <rect
                       x={34.8 * SCALE}
                       y={18.5 * SCALE}
@@ -562,7 +550,6 @@ export const StandPlan2D: React.FC<StandPlan2DProps> = ({
                     const rTable = 0.82 * SCALE;
                     return (
                       <g key={`table-${tb.id}`}>
-                        {/* 6 chairs around each table */}
                         {[0, 60, 120, 180, 240, 300].map((deg) => {
                           const rad = (deg * Math.PI) / 180;
                           const chX = cx + Math.cos(rad) * (rTable + 5);
@@ -579,7 +566,6 @@ export const StandPlan2D: React.FC<StandPlan2DProps> = ({
                             />
                           );
                         })}
-                        {/* White Round Tablecloth */}
                         <circle
                           cx={cx}
                           cy={cy}
@@ -588,13 +574,12 @@ export const StandPlan2D: React.FC<StandPlan2DProps> = ({
                           stroke="#9AA59F"
                           strokeWidth={1.5}
                         />
-                        {/* Centerpiece */}
                         <circle cx={cx} cy={cy} r={4} fill="#3B6E28" />
                       </g>
                     );
                   })}
 
-                  {/* Render all 51 Interior Stands (01 to 51) */}
+                  {/* Render all 41 Interior Stands (01 to 41) */}
                   {salonStands.map((stand) => {
                     const sx = stand.x * SCALE;
                     const sy = stand.z * SCALE;
@@ -605,20 +590,22 @@ export const StandPlan2D: React.FC<StandPlan2DProps> = ({
                     const typeMeta = STAND_TYPE_META[stand.type];
                     const statusMeta = STAND_STATUS_META[stand.effective_status];
 
-                    const statusSymbol =
-                      stand.effective_status === 'disponible'
-                        ? '✓'
-                        : stand.effective_status === 'reservado'
-                        ? '◷'
-                        : stand.effective_status === 'vendido'
-                        ? '■'
-                        : '×';
-
                     const isSold = stand.effective_status === 'vendido';
                     const isReserved = stand.effective_status === 'reservado';
                     const isBlocked = stand.effective_status === 'bloqueado';
 
-                    const cellFill = isSold
+                    // Match the exact official planimetry colors (Rosado #F5CBCB and Turquesa #4DA1A9)
+                    // while highlighting dynamically confirmed stands that don't have a multi-stand graphic overlay
+                    const hasCustomGraphicOverlay = [
+                      '01', '02', '03', '04', '05', '06', '07', '08',
+                      '09', '11', '12', '13', '14', '15', '16', '17', '18', '20',
+                    ].includes(stand.code);
+
+                    const cellFill = hasCustomGraphicOverlay
+                      ? stand.type === 'rosado'
+                        ? '#F5C6C7'
+                        : '#4DA1A9'
+                      : isSold
                       ? '#1F4E9C'
                       : isReserved
                       ? '#D9822B'
@@ -626,29 +613,12 @@ export const StandPlan2D: React.FC<StandPlan2DProps> = ({
                       ? '#8A918D'
                       : typeMeta.color;
 
-                    const textPrimaryFill = isSold || isReserved || isBlocked ? '#FFFFFF' : '#1F2421';
-                    const textSecondaryFill = isSold
-                      ? '#F4C20D'
-                      : isReserved
-                      ? '#FFF8EB'
-                      : isBlocked
-                      ? '#EEF2EF'
-                      : '#0F3D22';
-
-                    const subLabel = isSold
-                      ? '■ VEND'
-                      : isReserved
-                      ? '◷ 48H'
-                      : isBlocked
-                      ? '× BLOQ'
-                      : `${statusSymbol} $${stand.price_usd ?? typeMeta.priceUsd}`;
-
                     return (
                       <g
                         key={stand.id}
                         role="button"
                         tabIndex={0}
-                        aria-label={`Stand ${stand.code}, ${typeMeta.dimensionsLabel}, precio $${stand.price_usd}, estado ${statusMeta.label}`}
+                        aria-label={`Stand ${stand.code}, ${typeMeta.dimensionsLabel}, precio $${stand.price_usd}, estado ${statusMeta.label}${stand.exhibitor ? `, asignado a ${stand.exhibitor.name}` : ''}`}
                         onClick={() => onSelectStand(stand.code)}
                         onKeyDown={(e) => {
                           if (e.key === 'Enter' || e.key === ' ') {
@@ -665,41 +635,291 @@ export const StandPlan2D: React.FC<StandPlan2DProps> = ({
                           width={sw}
                           height={sh}
                           fill={cellFill}
-                          fillOpacity={isSelected ? 1 : 0.94}
-                          stroke={isSelected ? '#0F3D22' : '#1F2421'}
-                          strokeWidth={isSelected ? 3.2 : 1.1}
+                          fillOpacity={isSelected ? 1 : 0.96}
+                          stroke={isSelected ? '#0F3D22' : '#2C3531'}
+                          strokeWidth={isSelected ? 3.2 : 1.0}
                         />
 
-                        {/* Stand Number matching the exact typography of the Cenexpo PDF */}
-                        <text
-                          x={sx + sw / 2}
-                          y={sy + sh / 2 - 4}
-                          textAnchor="middle"
-                          dominantBaseline="middle"
-                          fill={textPrimaryFill}
-                          fontSize="13.5"
-                          fontWeight="800"
-                        >
-                          {stand.code}
-                        </text>
-
-                        {/* Price & Status mini badge */}
-                        <text
-                          x={sx + sw / 2}
-                          y={sy + sh / 2 + 11}
-                          textAnchor="middle"
-                          dominantBaseline="middle"
-                          fill={textSecondaryFill}
-                          fontSize="9.5"
-                          fontWeight="800"
-                        >
-                          {subLabel}
-                        </text>
+                        {/* If the stand is NOT one of the custom graphic overlay cells, render standard centered number & status */}
+                        {!hasCustomGraphicOverlay && (
+                          <>
+                            <text
+                              x={sx + sw / 2}
+                              y={sy + sh / 2 - 4}
+                              textAnchor="middle"
+                              dominantBaseline="middle"
+                              fill={isSold || isReserved || isBlocked ? '#FFFFFF' : '#1F2421'}
+                              fontSize="13.5"
+                              fontWeight="800"
+                            >
+                              {stand.code}
+                            </text>
+                            <text
+                              x={sx + sw / 2}
+                              y={sy + sh / 2 + 11}
+                              textAnchor="middle"
+                              dominantBaseline="middle"
+                              fill={isSold ? '#F4C20D' : isReserved ? '#FFF8EB' : '#0F3D22'}
+                              fontSize="9"
+                              fontWeight="800"
+                            >
+                              {isSold
+                                ? '■ VEND'
+                                : isReserved
+                                ? '◷ 48H'
+                                : `✓ $${stand.price_usd ?? typeMeta.priceUsd}`}
+                            </text>
+                          </>
+                        )}
                       </g>
                     );
                   })}
 
-                  {/* Structural Wall Pillars along line z=18.5m (matching the grey square pillars in the PDF) */}
+                  {/* =====================================================================
+                      EXACT BRAND LOGO OVERLAYS MATCHING THE OFFICIAL PLANIMETRY IMAGE
+                      (Pointer-events: none so clicking any stand cell underneath selects it!)
+                     ===================================================================== */}
+                  <g style={{ pointerEvents: 'none' }}>
+                    {/* 1. Stands 01 & 02: BISA · Biotecnología y Sostenibilidad Avanzada */}
+                    <text x={0.45 * SCALE} y={19.3 * SCALE} fill="#1F2421" fontSize="13" fontWeight="900">01</text>
+                    <text x={4.15 * SCALE} y={19.3 * SCALE} fill="#1F2421" fontSize="13" fontWeight="900">02</text>
+                    <rect
+                      x={0.85 * SCALE}
+                      y={18.85 * SCALE}
+                      width={3.3 * SCALE}
+                      height={2.45 * SCALE}
+                      rx={4}
+                      fill="#FFFFFF"
+                      stroke="#1E7A34"
+                      strokeWidth={1.2}
+                    />
+                    <image
+                      href="/assets/aistudio/WhatsApp_Image_2026-11-08_at_5.49.41_PM_b52197a9.jpeg"
+                      x={0.95 * SCALE}
+                      y={18.92 * SCALE}
+                      width={3.1 * SCALE}
+                      height={2.3 * SCALE}
+                      preserveAspectRatio="xMidYMid meet"
+                    />
+
+                    {/* 2. Stands 03 & 04: Agrollano · El aliado del productor */}
+                    <text x={5.45 * SCALE} y={19.25 * SCALE} fill="#1F2421" fontSize="13" fontWeight="900">03</text>
+                    <text x={8.95 * SCALE} y={19.25 * SCALE} fill="#1F2421" fontSize="13" fontWeight="900">04</text>
+                    <rect
+                      x={5.35 * SCALE}
+                      y={19.45 * SCALE}
+                      width={4.3 * SCALE}
+                      height={1.45 * SCALE}
+                      rx={4}
+                      fill="#FFFFFF"
+                      stroke="#1E7A34"
+                      strokeWidth={1}
+                    />
+                    <image
+                      href="/assets/sponsors/logo-agrollano.png"
+                      x={5.45 * SCALE}
+                      y={19.5 * SCALE}
+                      width={4.1 * SCALE}
+                      height={1.35 * SCALE}
+                      preserveAspectRatio="xMidYMid meet"
+                    />
+
+                    {/* 3. Stands 05 & 06: WOW (Wao) */}
+                    <text x={10.45 * SCALE} y={19.25 * SCALE} fill="#1F2421" fontSize="13" fontWeight="900">05</text>
+                    <text x={13.95 * SCALE} y={19.25 * SCALE} fill="#1F2421" fontSize="13" fontWeight="900">06</text>
+                    <image
+                      href="/assets/sponsors/logo-wow.svg"
+                      x={10.65 * SCALE}
+                      y={19.35 * SCALE}
+                      width={3.7 * SCALE}
+                      height={1.85 * SCALE}
+                      preserveAspectRatio="xMidYMid meet"
+                    />
+
+                    {/* 4. Stands 07 & 08: Helados La Cascada */}
+                    <text x={15.45 * SCALE} y={19.25 * SCALE} fill="#1F2421" fontSize="13" fontWeight="900">07</text>
+                    <text x={18.95 * SCALE} y={19.25 * SCALE} fill="#1F2421" fontSize="13" fontWeight="900">08</text>
+                    <image
+                      href="/assets/sponsors/logo-helados-la-cascada.png"
+                      x={15.35 * SCALE}
+                      y={19.15 * SCALE}
+                      width={4.3 * SCALE}
+                      height={2.15 * SCALE}
+                      preserveAspectRatio="xMidYMid meet"
+                    />
+
+                    {/* 5. Bottom-Left Island: Stands 13, 14, 15, 16 -> BANCO SOFITASA */}
+                    <text x={3.35 * SCALE} y={11.05 * SCALE} fill="#1F2421" fontSize="11.5" fontWeight="900">15</text>
+                    <text x={5.85 * SCALE} y={11.05 * SCALE} fill="#1F2421" fontSize="11.5" fontWeight="900">16</text>
+                    <text x={3.35 * SCALE} y={14.35 * SCALE} fill="#1F2421" fontSize="11.5" fontWeight="900">14</text>
+                    <text x={5.85 * SCALE} y={14.35 * SCALE} fill="#1F2421" fontSize="11.5" fontWeight="900">13</text>
+                    <rect
+                      x={4.05 * SCALE}
+                      y={11.2 * SCALE}
+                      width={2.9 * SCALE}
+                      height={2.6 * SCALE}
+                      rx={4}
+                      fill="#FFFFFF"
+                      stroke="#1F4E9C"
+                      strokeWidth={1.3}
+                    />
+                    <image
+                      href="/assets/aistudio/foto_perfil_bancosofitasa_96c1e6f0.jpg"
+                      x={4.4 * SCALE}
+                      y={11.3 * SCALE}
+                      width={2.2 * SCALE}
+                      height={1.85 * SCALE}
+                      preserveAspectRatio="xMidYMid meet"
+                    />
+                    <text
+                      x={5.5 * SCALE}
+                      y={13.55 * SCALE}
+                      textAnchor="middle"
+                      fill="#1F4E9C"
+                      fontSize="7.5"
+                      fontWeight="900"
+                    >
+                      BANCO SOFITASA
+                    </text>
+
+                    {/* 6. Stand 17: Agro Insumos del Táchira */}
+                    <text x={8.35 * SCALE} y={11.05 * SCALE} fill="#1F2421" fontSize="11.5" fontWeight="900">17</text>
+                    <rect
+                      x={8.2 * SCALE}
+                      y={11.15 * SCALE}
+                      width={2.1 * SCALE}
+                      height={1.2 * SCALE}
+                      rx={3}
+                      fill="#FFFFFF"
+                    />
+                    <image
+                      href="/assets/sponsors/logo-agroinsumos-tachira.svg"
+                      x={8.22 * SCALE}
+                      y={11.17 * SCALE}
+                      width={2.06 * SCALE}
+                      height={1.16 * SCALE}
+                      preserveAspectRatio="xMidYMid meet"
+                    />
+
+                    {/* 7. Stand 12: ALDEFRIO */}
+                    <text x={8.35 * SCALE} y={14.35 * SCALE} fill="#1F2421" fontSize="11.5" fontWeight="900">12</text>
+                    <image
+                      href="/assets/sponsors/logo-aldefrio.svg"
+                      x={8.2 * SCALE}
+                      y={12.62 * SCALE}
+                      width={2.1 * SCALE}
+                      height={1.35 * SCALE}
+                      preserveAspectRatio="xMidYMid meet"
+                    />
+
+                    {/* 8. Stand 18: AGRINOVA */}
+                    <text x={14.85 * SCALE} y={11.05 * SCALE} fill="#1F2421" fontSize="11.5" fontWeight="900">18</text>
+                    <rect
+                      x={14.7 * SCALE}
+                      y={11.18 * SCALE}
+                      width={2.1 * SCALE}
+                      height={1.15 * SCALE}
+                      rx={3}
+                      fill="#FFFFFF"
+                    />
+                    <image
+                      href="/assets/sponsors/logo-agrinova.png"
+                      x={14.75 * SCALE}
+                      y={11.22 * SCALE}
+                      width={2.0 * SCALE}
+                      height={1.07 * SCALE}
+                      preserveAspectRatio="xMidYMid meet"
+                    />
+
+                    {/* 9. Stand 11: AgroMarket (El suyo / tu stand) */}
+                    <text x={14.85 * SCALE} y={13.1 * SCALE} fill="#1F2421" fontSize="11.5" fontWeight="900">11</text>
+                    <rect
+                      x={15.1 * SCALE}
+                      y={12.7 * SCALE}
+                      width={1.65 * SCALE}
+                      height={1.6 * SCALE}
+                      rx={4}
+                      fill="#FFFFFF"
+                      stroke="#1E7A34"
+                      strokeWidth={1.2}
+                    />
+                    <rect
+                      x={15.25 * SCALE}
+                      y={12.82 * SCALE}
+                      width={1.35 * SCALE}
+                      height={1.15 * SCALE}
+                      rx={3}
+                      fill="#1E7A34"
+                    />
+                    <text
+                      x={15.92 * SCALE}
+                      y={13.55 * SCALE}
+                      textAnchor="middle"
+                      fill="#FFFFFF"
+                      fontSize="12"
+                      fontWeight="900"
+                    >
+                      🌿
+                    </text>
+                    <text
+                      x={15.92 * SCALE}
+                      y={14.2 * SCALE}
+                      textAnchor="middle"
+                      fill="#0F3D22"
+                      fontSize="6.2"
+                      fontWeight="900"
+                    >
+                      AGROMARKET
+                    </text>
+
+                    {/* 10. Stand 20: TECNO AGUA */}
+                    <text x={19.85 * SCALE} y={11.05 * SCALE} fill="#1F2421" fontSize="11.5" fontWeight="900">20</text>
+                    <text
+                      x={20.75 * SCALE}
+                      y={11.65 * SCALE}
+                      textAnchor="middle"
+                      fill="#FFFFFF"
+                      fontSize="10"
+                      fontWeight="900"
+                    >
+                      TECNO
+                    </text>
+                    <text
+                      x={20.75 * SCALE}
+                      y={12.18 * SCALE}
+                      textAnchor="middle"
+                      fill="#FFFFFF"
+                      fontSize="10"
+                      fontWeight="900"
+                    >
+                      AGUA
+                    </text>
+
+                    {/* 11. Stand 09: NARBHED / INARVET (Por confirmar) */}
+                    <text x={19.85 * SCALE} y={13.1 * SCALE} fill="#1F2421" fontSize="11.5" fontWeight="900">09</text>
+                    <text
+                      x={20.75 * SCALE}
+                      y={13.85 * SCALE}
+                      textAnchor="middle"
+                      fill="#FFFFFF"
+                      fontSize="8.8"
+                      fontWeight="800"
+                    >
+                      NARBHED
+                    </text>
+                    <text
+                      x={20.75 * SCALE}
+                      y={14.3 * SCALE}
+                      textAnchor="middle"
+                      fill="#FFF8EB"
+                      fontSize="6.8"
+                      fontWeight="800"
+                    >
+                      (INARVET)
+                    </text>
+                  </g>
+
+                  {/* Structural Wall Pillars along line z=18.5m (matching the grey square pillars in the planimetry) */}
                   {bottomPillarsX.map((px, idx) => (
                     <rect
                       key={`pillar-${idx}`}
@@ -715,16 +935,180 @@ export const StandPlan2D: React.FC<StandPlan2DProps> = ({
 
                   {/* Bottom Dimension Callout */}
                   <text
-                    x={11.25 * SCALE}
+                    x={19.0 * SCALE}
                     y={SVG_H + 22}
                     textAnchor="middle"
                     fill="#1F2421"
                     fontSize="11.5"
                     fontWeight="700"
                   >
-                    ◄──── FILA ENTRADA (STANDS 01 AL 09): 9 × 2,50 m = 22,50 m × 3,00 m de fondo (7,50 m² c/u · $480) ────►
+                    ◄──── BLOQUE PRINCIPAL (STANDS 01 AL 08): BISA (01–02) · AGROLLANO (03–04) · WOW (05–06) · LA CASCADA (07–08) ────►
                   </text>
                 </svg>
+              </div>
+
+              {/* Structured Summary of Current Stand Assignments (Bloque Principal & Lado de La Cascada) */}
+              <div className="mt-4 rounded-[10px] border border-[#0F3D22]/20 bg-white p-4">
+                <div className="flex flex-wrap items-center justify-between gap-2 border-b border-[#1F2421]/10 pb-2.5">
+                  <h4 className="font-display-wide text-scale-16 text-[#0F3D22]">
+                    Asignación Actual de Stands en Planimetría (Haz clic para inspeccionar)
+                  </h4>
+                  <span className="rounded-[4px] bg-[#1E7A34]/15 px-2.5 py-0.5 text-[11px] font-bold text-[#0F3D22]">
+                    17 módulos confirmados · 1 por confirmar · 23 libres en Salón
+                  </span>
+                </div>
+
+                <div className="mt-3 grid grid-cols-1 gap-4 md:grid-cols-2">
+                  {/* Column 1: Bloque Principal */}
+                  <div className="rounded-[8px] border border-[#F5B7B8] bg-[#F5B7B8]/15 p-3.5">
+                    <p className="text-[12px] font-extrabold uppercase tracking-wider text-[#8C2D32]">
+                      Bloque Principal · Sector Rosado (Entrada)
+                    </p>
+                    <ul className="mt-2.5 space-y-2 text-scale-14">
+                      <li>
+                        <button
+                          type="button"
+                          onClick={() => onSelectStand('01')}
+                          className="flex w-full items-center justify-between rounded-[6px] bg-white px-3 py-2 text-left shadow-xs hover:border-[#0F3D22] border border-transparent transition-colors"
+                        >
+                          <span className="font-bold text-[#1F2421]">• Stands 01 y 02: BISA</span>
+                          <span className="rounded-[4px] bg-[#1E7A34]/15 px-2 py-0.5 text-[11px] font-bold text-[#0F3D22]">
+                            15,0 m² · Confirmado
+                          </span>
+                        </button>
+                      </li>
+                      <li>
+                        <button
+                          type="button"
+                          onClick={() => onSelectStand('03')}
+                          className="flex w-full items-center justify-between rounded-[6px] bg-white px-3 py-2 text-left shadow-xs hover:border-[#0F3D22] border border-transparent transition-colors"
+                        >
+                          <span className="font-bold text-[#1F2421]">• Stands 03 y 04: Agrollano</span>
+                          <span className="rounded-[4px] bg-[#1E7A34]/15 px-2 py-0.5 text-[11px] font-bold text-[#0F3D22]">
+                            15,0 m² · Confirmado
+                          </span>
+                        </button>
+                      </li>
+                      <li>
+                        <button
+                          type="button"
+                          onClick={() => onSelectStand('05')}
+                          className="flex w-full items-center justify-between rounded-[6px] bg-white px-3 py-2 text-left shadow-xs hover:border-[#0F3D22] border border-transparent transition-colors"
+                        >
+                          <span className="font-bold text-[#1F2421]">• Stands 05 y 06: WOW (Wao)</span>
+                          <span className="rounded-[4px] bg-[#1E7A34]/15 px-2 py-0.5 text-[11px] font-bold text-[#0F3D22]">
+                            15,0 m² · Confirmado
+                          </span>
+                        </button>
+                      </li>
+                      <li>
+                        <button
+                          type="button"
+                          onClick={() => onSelectStand('07')}
+                          className="flex w-full items-center justify-between rounded-[6px] bg-white px-3 py-2 text-left shadow-xs hover:border-[#0F3D22] border border-transparent transition-colors"
+                        >
+                          <span className="font-bold text-[#1F2421]">• Stands 07 y 08: Helados La Cascada</span>
+                          <span className="rounded-[4px] bg-[#1E7A34]/15 px-2 py-0.5 text-[11px] font-bold text-[#0F3D22]">
+                            15,0 m² · Confirmado
+                          </span>
+                        </button>
+                      </li>
+                    </ul>
+                  </div>
+
+                  {/* Column 2: Lado de La Cascada & Islas Inferiores */}
+                  <div className="rounded-[8px] border border-[#4DA1A9]/40 bg-[#4DA1A9]/10 p-3.5">
+                    <p className="text-[12px] font-extrabold uppercase tracking-wider text-[#0F3D22]">
+                      Lado de La Cascada e Islas Centrales Inferiores
+                    </p>
+                    <ul className="mt-2.5 space-y-1.5 text-scale-14">
+                      <li>
+                        <button
+                          type="button"
+                          onClick={() => onSelectStand('13')}
+                          className="flex w-full items-center justify-between rounded-[6px] bg-white px-3 py-1.5 text-left shadow-xs hover:border-[#1F4E9C] border border-transparent transition-colors"
+                        >
+                          <span className="font-bold text-[#1F2421]">• Stands 13, 14, 15 y 16: Banco Sofitasa</span>
+                          <span className="rounded-[4px] bg-[#1F4E9C]/15 px-2 py-0.5 text-[11px] font-bold text-[#1F4E9C]">
+                            20,0 m² · Confirmado
+                          </span>
+                        </button>
+                      </li>
+                      <li>
+                        <button
+                          type="button"
+                          onClick={() => onSelectStand('17')}
+                          className="flex w-full items-center justify-between rounded-[6px] bg-white px-3 py-1.5 text-left shadow-xs hover:border-[#0F3D22] border border-transparent transition-colors"
+                        >
+                          <span className="font-bold text-[#1F2421]">• Stand 17: Agro Insumos del Táchira</span>
+                          <span className="rounded-[4px] bg-[#1E7A34]/15 px-2 py-0.5 text-[11px] font-bold text-[#0F3D22]">
+                            5,0 m² · Confirmado
+                          </span>
+                        </button>
+                      </li>
+                      <li>
+                        <button
+                          type="button"
+                          onClick={() => onSelectStand('12')}
+                          className="flex w-full items-center justify-between rounded-[6px] bg-white px-3 py-1.5 text-left shadow-xs hover:border-[#0F3D22] border border-transparent transition-colors"
+                        >
+                          <span className="font-bold text-[#1F2421]">• Stand 12: Aldefrio (Al de Frío)</span>
+                          <span className="rounded-[4px] bg-[#1E7A34]/15 px-2 py-0.5 text-[11px] font-bold text-[#0F3D22]">
+                            5,0 m² · Confirmado
+                          </span>
+                        </button>
+                      </li>
+                      <li>
+                        <button
+                          type="button"
+                          onClick={() => onSelectStand('18')}
+                          className="flex w-full items-center justify-between rounded-[6px] bg-white px-3 py-1.5 text-left shadow-xs hover:border-[#0F3D22] border border-transparent transition-colors"
+                        >
+                          <span className="font-bold text-[#1F2421]">• Stand 18: Agrinova</span>
+                          <span className="rounded-[4px] bg-[#1E7A34]/15 px-2 py-0.5 text-[11px] font-bold text-[#0F3D22]">
+                            5,0 m² · Confirmado
+                          </span>
+                        </button>
+                      </li>
+                      <li>
+                        <button
+                          type="button"
+                          onClick={() => onSelectStand('11')}
+                          className="flex w-full items-center justify-between rounded-[6px] bg-white px-3 py-1.5 text-left shadow-xs hover:border-[#0F3D22] border border-transparent transition-colors"
+                        >
+                          <span className="font-bold text-[#0F3D22]">• Stand 11: AgroMarket (Tu stand / Presentador)</span>
+                          <span className="rounded-[4px] bg-[#F4C20D]/30 px-2 py-0.5 text-[11px] font-bold text-[#0F3D22]">
+                            5,0 m² · Confirmado
+                          </span>
+                        </button>
+                      </li>
+                      <li>
+                        <button
+                          type="button"
+                          onClick={() => onSelectStand('20')}
+                          className="flex w-full items-center justify-between rounded-[6px] bg-white px-3 py-1.5 text-left shadow-xs hover:border-[#0F3D22] border border-transparent transition-colors"
+                        >
+                          <span className="font-bold text-[#1F2421]">• Stand 20: Tecnoagua (Tecno Agua)</span>
+                          <span className="rounded-[4px] bg-[#1E7A34]/15 px-2 py-0.5 text-[11px] font-bold text-[#0F3D22]">
+                            5,0 m² · Confirmado
+                          </span>
+                        </button>
+                      </li>
+                      <li>
+                        <button
+                          type="button"
+                          onClick={() => onSelectStand('09')}
+                          className="flex w-full items-center justify-between rounded-[6px] bg-[#FDF6E7] px-3 py-1.5 text-left shadow-xs border border-[#E8A317]/40 hover:border-[#E8A317] transition-colors"
+                        >
+                          <span className="font-bold text-[#9A5512]">• Stand 09: Inarvet / Narbhed</span>
+                          <span className="rounded-[4px] bg-[#E8A317]/25 px-2 py-0.5 text-[11px] font-bold text-[#9A5512]">
+                            Por confirmar
+                          </span>
+                        </button>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
               </div>
             </div>
           )}
@@ -967,16 +1351,16 @@ export const StandPlan2D: React.FC<StandPlan2DProps> = ({
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
               <div className="overflow-hidden rounded-[12px] border border-[#1F2421]/20 bg-white">
                 <img
-                  src="/assets/extracted/pabellon_page_5.jpg"
-                  alt="Lámina oficial de la Planimetría del Salón de Exposiciones con foto real del salón y los 51 stands"
+                  src="/assets/aistudio/WhatsApp_Image_2026-11-13_at_3.39.49_PM_f3867c62.jpeg"
+                  alt="Planimetría oficial actualizada del Salón de Exposiciones con los 41 stands numerados del 01 al 41"
                   className="w-full h-auto block"
                 />
                 <div className="border-t border-[#1F2421]/10 p-3.5">
                   <p className="font-display-wide text-scale-16 text-[#1F2421]">
-                    Lámina Oficial: Salón de Exposiciones (51 Stands)
+                    Lámina Oficial: Planimetría del Salón de Exposiciones (41 Stands)
                   </p>
                   <p className="mt-0.5 text-[13px] text-[#1F2421]/75">
-                    Incluye fotografía real del salón del Casino Militar, tarifas BCV€ ($480 y $400) y ubicación de Show Bisnet.
+                    Distribución oficial de los 8 stands rosados (01–08), las 4 islas centrales (09–32), la fila norte (33–41), las 7 mesas y CONFERENCIAS.
                   </p>
                 </div>
               </div>
@@ -1254,7 +1638,7 @@ export const StandPlan2D: React.FC<StandPlan2DProps> = ({
                   Selecciona un stand o zona
                 </h3>
                 <p className="mt-2 text-scale-14 text-[#1F2421]/80">
-                  Haz clic en cualquiera de los 51 stands del Salón de Exposiciones (01 al 51) o en las 8 zonas de Expoauto (EA-01 a EA-08) para ver sus medidas exactas en m² y su costo a Tasa BCV.
+                  Haz clic en cualquiera de los 41 stands del Salón de Exposiciones (01 al 41) o en las 8 zonas de Expoauto (EA-01 a EA-08) para ver sus medidas exactas en m², la marca asignada y su costo a Tasa BCV.
                 </p>
                 <div className="mt-4 flex flex-wrap gap-2">
                   <button
@@ -1262,14 +1646,21 @@ export const StandPlan2D: React.FC<StandPlan2DProps> = ({
                     onClick={() => onSelectStand('01')}
                     className="inline-flex min-h-[40px] items-center justify-center rounded-[4px] border border-[#1F4E9C] bg-white px-3.5 py-1.5 text-scale-14 font-semibold text-[#1F4E9C] hover:bg-[#1F4E9C] hover:text-white transition-colors"
                   >
-                    Ver Stand 01 (7,50 m² · $480)
+                    Ver Stand 01 · BISA (7,50 m² · $480)
                   </button>
                   <button
                     type="button"
-                    onClick={() => onSelectStand('25')}
+                    onClick={() => onSelectStand('13')}
+                    className="inline-flex min-h-[40px] items-center justify-center rounded-[4px] border border-[#1F4E9C] bg-white px-3.5 py-1.5 text-scale-14 font-semibold text-[#1F4E9C] hover:bg-[#1F4E9C] hover:text-white transition-colors"
+                  >
+                    Ver Stand 13 · Sofitasa (5,00 m² · $400)
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => onSelectStand('24')}
                     className="inline-flex min-h-[40px] items-center justify-center rounded-[4px] border border-[#1E7A34] bg-white px-3.5 py-1.5 text-scale-14 font-semibold text-[#1E7A34] hover:bg-[#1E7A34] hover:text-white transition-colors"
                   >
-                    Ver Stand 25 (5,00 m² · $400)
+                    Ver Stand 24 Libre (5,00 m² · $400)
                   </button>
                 </div>
               </div>
@@ -1288,7 +1679,7 @@ export const StandPlan2D: React.FC<StandPlan2DProps> = ({
                 Fotografía real del Salón de Exposiciones
               </h4>
               <p className="mt-1 text-[13px] text-[#1F2421]/75">
-                Nave techada del Casino Militar de La Grita donde se instalan los 51 stands comerciales (01–51), las 7 mesas redondas de negocios y la tarima Show Bisnet al fondo.
+                Nave techada del Casino Militar de La Grita donde se instalan los 41 stands comerciales (01–41), las 7 mesas redondas de negocios y el área de CONFERENCIAS al fondo.
               </p>
             </div>
           </div>
@@ -1323,16 +1714,16 @@ export const StandPlan2D: React.FC<StandPlan2DProps> = ({
             <tbody className="divide-y divide-[#1F2421]/10">
               <tr className="bg-[#F5B7B8]/20">
                 <td className="py-3 px-4 font-semibold text-[#1F2421]">
-                  Stands Tipo Rosado (Pared Entrada Salón)
+                  Stands Tipo Rosado · Bloque Principal (Pared Entrada)
                 </td>
                 <td className="py-3 px-4 font-mono font-bold text-[#0F3D22]">
-                  9 stands: 01 al 09
+                  8 stands: 01 al 08
                 </td>
                 <td className="py-3 px-4 tabular-nums">
-                  2,50 m × 3,00 m (Fila total: 22,50 m × 3,00 m)
+                  2,50 m × 3,00 m (Fila total: 20,00 m × 3,00 m)
                 </td>
                 <td className="py-3 px-4 font-semibold tabular-nums">
-                  7,50 m² c/u (67,50 m² total)
+                  7,50 m² c/u (60,00 m² total)
                 </td>
                 <td className="py-3 px-4 text-right font-display-wide text-[#0F3D22]">
                   $480 c/u
@@ -1340,16 +1731,16 @@ export const StandPlan2D: React.FC<StandPlan2DProps> = ({
               </tr>
               <tr className="bg-[#1995A2]/10">
                 <td className="py-3 px-4 font-semibold text-[#1F2421]">
-                  Stands Tipo Turquesa · Isla Doble Inferior
+                  Stands Tipo Turquesa · 2 Islas Centrales Inferiores (Lado de La Cascada)
                 </td>
                 <td className="py-3 px-4 font-mono font-bold text-[#0F3D22]">
-                  16 stands: 10 al 17 y 18 al 25
+                  12 stands: 09–11, 18–20 y 12–17
                 </td>
                 <td className="py-3 px-4 tabular-nums">
-                  2,50 m × 2,00 m (Isla 8×2: 20,00 m × 4,00 m)
+                  2,50 m × 2,00 m (2 Islas 3×2 de 7,50 m × 4,00 m c/u)
                 </td>
                 <td className="py-3 px-4 font-semibold tabular-nums">
-                  5,00 m² c/u (80,00 m² total)
+                  5,00 m² c/u (60,00 m² total)
                 </td>
                 <td className="py-3 px-4 text-right font-display-wide text-[#0F3D22]">
                   $400 c/u
@@ -1357,16 +1748,16 @@ export const StandPlan2D: React.FC<StandPlan2DProps> = ({
               </tr>
               <tr className="bg-[#1995A2]/10">
                 <td className="py-3 px-4 font-semibold text-[#1F2421]">
-                  Stands Tipo Turquesa · Isla Doble Superior
+                  Stands Tipo Turquesa · 2 Islas Centrales Superiores
                 </td>
                 <td className="py-3 px-4 font-mono font-bold text-[#0F3D22]">
-                  16 stands: 26 al 33 y 34 al 41
+                  12 stands: 21–23, 30–32 y 24–29
                 </td>
                 <td className="py-3 px-4 tabular-nums">
-                  2,50 m × 2,00 m (Isla 8×2: 20,00 m × 4,00 m)
+                  2,50 m × 2,00 m (2 Islas 3×2 de 7,50 m × 4,00 m c/u)
                 </td>
                 <td className="py-3 px-4 font-semibold tabular-nums">
-                  5,00 m² c/u (80,00 m² total)
+                  5,00 m² c/u (60,00 m² total)
                 </td>
                 <td className="py-3 px-4 text-right font-display-wide text-[#0F3D22]">
                   $400 c/u
@@ -1374,16 +1765,16 @@ export const StandPlan2D: React.FC<StandPlan2DProps> = ({
               </tr>
               <tr className="bg-[#1995A2]/10">
                 <td className="py-3 px-4 font-semibold text-[#1F2421]">
-                  Stands Tipo Turquesa · Fila Pared Superior
+                  Stands Tipo Turquesa · Fila Pared Superior Norte
                 </td>
                 <td className="py-3 px-4 font-mono font-bold text-[#0F3D22]">
-                  10 stands: 42 al 51
+                  9 stands: 33 al 41
                 </td>
                 <td className="py-3 px-4 tabular-nums">
-                  2,50 m × 2,00 m (Fila total: 25,00 m × 2,00 m)
+                  2,50 m × 2,00 m (Fila total: 22,50 m × 2,00 m)
                 </td>
                 <td className="py-3 px-4 font-semibold tabular-nums">
-                  5,00 m² c/u (50,00 m² total)
+                  5,00 m² c/u (45,00 m² total)
                 </td>
                 <td className="py-3 px-4 text-right font-display-wide text-[#0F3D22]">
                   $400 c/u
@@ -1391,7 +1782,7 @@ export const StandPlan2D: React.FC<StandPlan2DProps> = ({
               </tr>
               <tr>
                 <td className="py-3 px-4 font-semibold text-[#1F2421]">
-                  Zona de Mesas + Tarima SHOW BISNET (Salón)
+                  Zona de Mesas + Área CONFERENCIAS (Salón)
                 </td>
                 <td className="py-3 px-4 font-mono text-[#1F2421]">
                   7 mesas (42 sillas) + Tarima

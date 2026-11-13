@@ -117,7 +117,7 @@ export const INITIAL_EVENT_CONFIG: EventConfig = {
     {
       id: 'faq-stand',
       question: '¿Cuáles son las medidas y costos oficiales de los stands y zonas de Expoauto?',
-      answer: 'En el Salón de Exposiciones hay 51 stands: 9 stands Tipo Rosado de 2,5 × 3,0 m (7,50 m²) por $480 y 42 stands Tipo Turquesa de 2,5 × 2,0 m (5,00 m²) por $400 (Tasa BCV€). En el área exterior de Expoauto hay 8 zonas desde 100 m² ($1.600) hasta 170 m² ($2.100) a Tasa BCV.',
+      answer: 'En la nueva Planimetría del Salón de Exposiciones hay 41 stands numerados del 01 al 41: 8 stands Tipo Rosado de 2,5 × 3,0 m (7,50 m²) por $480 en la pared de entrada (01 al 08) y 33 stands Tipo Turquesa de 2,5 × 2,0 m (5,00 m²) por $400 (Tasa BCV€) distribuidos en 4 islas centrales de 6 stands (09 al 32) y 9 stands en la pared norte (33 al 41). En el área exterior de Expoauto hay 8 zonas desde 100 m² ($1.600) hasta 170 m² ($2.100) a Tasa BCV.',
     },
   ],
   gallery_enabled: false, // Hidden until gallery_enabled is set to true in /admin
@@ -129,9 +129,9 @@ export const INITIAL_ZONES: ZoneRecord[] = [
     slug: 'salon-exposicion',
     name: '1. Salón de exposición',
     kind: 'exposicion',
-    stats: '38,0 × 21,5 m (817 m²) · 51 stands + Show Bisnet',
+    stats: '38,0 × 21,5 m (817 m²) · 41 stands (01–41) + Conferencias',
     description:
-      'Nave principal techada del Casino Militar con 51 stands numerados (01 al 51): 9 stands rosados de 2,5 × 3,0 m (7,50 m², $480) en la pared de entrada y 42 stands turquesa de 2,5 × 2,0 m (5,00 m², $400) en dos islas dobles centrales (10–41) y la pared superior (42–51), además de 7 mesas de negocios y la tarima SHOW BISNET.',
+      'Nave principal techada del Casino Militar con 41 stands numerados (01 al 41): 8 stands rosados de 2,5 × 3,0 m (7,50 m², $480) en la pared de entrada (01–08) y 33 stands turquesa de 2,5 × 2,0 m (5,00 m², $400) en 4 islas centrales (09–32) y la pared norte (33–41), además de 7 mesas de negocios y la tarima de CONFERENCIAS.',
     geometry: { x: 255, y: 18, width: 215, height: 155 },
   },
   {
@@ -177,35 +177,119 @@ export const INITIAL_ZONES: ZoneRecord[] = [
 ];
 
 /**
- * Official Grand Sponsors & Digital Presenter (confirmed with official brand assets and flagship stands 01–03)
- * plus the remaining organizations announced earlier in 2026 seeded in "por_reconfirmar".
+ * Confirmed Sponsors, Exhibitors & Institutional Collaborators with official logos and assigned stands
+ * matching the official Salón de Exposiciones planimetry, plus pre-announced organizations in "por_reconfirmar".
  */
 export const INITIAL_EXHIBITORS: ExhibitorRecord[] = [
-  // 1. Grand Official Sponsors & Digital Presenter (Confirmed)
-  {
-    id: 'org-sofitasa',
-    name: 'Banco Sofitasa · Banco Universal',
-    level: 'patrocinador',
-    sector: 'Banca Universal y Financiamiento Agropecuario',
-    description:
-      'Patrocinador Oficial Principal ("El Banco de los Andes"). Institución financiera líder del Táchira con Cartera Única Productiva Agrícola, créditos de capital de trabajo, financiamiento de maquinaria y soluciones de pago inmediato para productores, ferieros y agroindustrias de La Grita.',
-    logo_url: '/assets/aistudio/images_fe5e43fa.png',
-    instagram: '@bancosofitasa',
-    whatsapp: '+58 414 7589270',
-    stand_code: '01',
-    status: 'confirmado',
-  },
+  // ===========================================================================
+  // 1. BLOQUE PRINCIPAL (SECTOR ROSADO · STANDS 01 AL 08)
+  // ===========================================================================
   {
     id: 'org-bisa',
     name: 'BISA · Biotecnología y Sostenibilidad Avanzada',
     level: 'patrocinador',
     sector: 'Biotecnología Agrícola y Soluciones Agroecológicas',
     description:
-      'Patrocinador Oficial Principal (Biocentro de Soluciones Agroecológicas, C.A.). Especialistas en bioinsumos de alta eficacia, control biológico de plagas y enfermedades, regeneración microbiológica de suelos y paquetes tecnológicos Kit BISA para cultivos andinos de papa, hortalizas, café y frutales.',
+      'Patrocinador Oficial Principal (Biocentro de Soluciones Agroecológicas, C.A.) · Bloque Principal Stands 01 y 02 (15,0 m²). Especialistas en bioinsumos de alta eficacia, control biológico de plagas y enfermedades, regeneración microbiológica de suelos y paquetes tecnológicos Kit BISA para cultivos andinos.',
     logo_url: '/assets/aistudio/WhatsApp_Image_2026-11-08_at_5.49.41_PM_b52197a9.jpeg',
     instagram: '@bisa_ve',
     whatsapp: '+58 414 7130598',
-    stand_code: '02',
+    stand_code: '01',
+    status: 'confirmado',
+  },
+  {
+    id: 'org-agrollano',
+    name: 'Agrollano · El aliado del productor',
+    level: 'patrocinador',
+    sector: 'Insumos Agrícolas y Red de Agrotiendas',
+    description:
+      'Grupo Agrollano (grupoagrollano.com) · Bloque Principal Stands 03 y 04 (15,0 m²). Red nacional de agrotiendas con presencia en El Cobre y el eje andino del Táchira, dedicada al suministro de semillas de alto rendimiento, fertilizantes, agroquímicos y asesoría técnica directa en campo.',
+    logo_url: '/assets/sponsors/logo-agrollano.png',
+    instagram: '@grupo_agrollano',
+    whatsapp: '+58 414 7589270',
+    stand_code: '03',
+    status: 'confirmado',
+  },
+  {
+    id: 'org-wow',
+    name: 'WOW (Wao)',
+    level: 'patrocinador',
+    sector: 'Conectividad, Servicios y Soluciones Comerciales',
+    description:
+      'Marca confirmada en el Bloque Principal de entrada · Stands 05 y 06 (15,0 m² · Sector Rosado frente al acceso principal del Salón de Exposiciones).',
+    logo_url: '/assets/sponsors/logo-wow.svg',
+    instagram: null,
+    whatsapp: '+58 414 7589270',
+    stand_code: '05',
+    status: 'confirmado',
+  },
+  {
+    id: 'org-helados-la-cascada',
+    name: 'Helados La Cascada',
+    level: 'patrocinador',
+    sector: 'Agroindustria Láctea y Alimentos Tradicionales',
+    description:
+      'Marca emblemática nacida en La Grita, Municipio Jáuregui (heladoslacascada.com) · Bloque Principal Stands 07 y 08 (15,0 m²). Elaboración artesanal e industrial de helados cremosos, paletas, barquillas y derivados lácteos con frutas y leche fresca de los Andes tachirenses.',
+    logo_url: '/assets/sponsors/logo-helados-la-cascada.png',
+    instagram: '@heladoslacascada',
+    whatsapp: '+58 414 7407076',
+    stand_code: '07',
+    status: 'confirmado',
+  },
+
+  // ===========================================================================
+  // 2. ISLAS INFERIORES / LADO DE LA CASCADA (STANDS 09 AL 20)
+  // ===========================================================================
+  {
+    id: 'org-sofitasa',
+    name: 'Banco Sofitasa · Banco Universal',
+    level: 'patrocinador',
+    sector: 'Banca Universal y Financiamiento Agropecuario',
+    description:
+      'Patrocinador Oficial Principal ("El Banco de los Andes") · Isla Sur-Oeste Stands 13, 14, 15 y 16 (20,0 m²). Institución financiera líder del Táchira con Cartera Única Productiva Agrícola, créditos de capital de trabajo, financiamiento de maquinaria y soluciones de pago inmediato.',
+    logo_url: '/assets/aistudio/images_fe5e43fa.png',
+    instagram: '@bancosofitasa',
+    whatsapp: '+58 414 7589270',
+    stand_code: '13',
+    status: 'confirmado',
+  },
+  {
+    id: 'org-agro-insumos-tachira',
+    name: 'Agro Insumos del Táchira',
+    level: 'expositor',
+    sector: 'Insumos Agrícolas y Suministros Andinos',
+    description:
+      'Lado de La Cascada · Isla Sur-Oeste Stand 17 (5,0 m²). Distribución especializada de semillas certificadas, fertilizantes edáficos y foliares, herramientas y programas de protección fitosanitaria para los productores de papa y hortalizas del municipio Jáuregui.',
+    logo_url: '/assets/sponsors/logo-agroinsumos-tachira.svg',
+    instagram: '@agroinsumostach',
+    whatsapp: '+58 414 7589270',
+    stand_code: '17',
+    status: 'confirmado',
+  },
+  {
+    id: 'org-aldefrio',
+    name: 'Aldefrio C.A. (Al de Frío)',
+    level: 'expositor',
+    sector: 'Agroindustria, Refrigeración y Cadena de Frío',
+    description:
+      'Lado de La Cascada · Isla Sur-Oeste Stand 12 (5,0 m²). Empresa tachirense afiliada a VENACOR especialista en equipamiento de refrigeración comercial e industrial, cuartos fríos para acopio agrícola, climatización y cadena de frío para conservar la cosecha.',
+    logo_url: '/assets/sponsors/logo-aldefrio.svg',
+    instagram: '@aldefrioca',
+    whatsapp: '+58 414 7438201',
+    stand_code: '12',
+    status: 'confirmado',
+  },
+  {
+    id: 'org-agrinova',
+    name: 'Agrinova · Agricultura e Innovación',
+    level: 'patrocinador',
+    sector: 'Semillas, Biológicos y Protección de Cultivos',
+    description:
+      'AGRINOVA, C.A. (agrinova.com.ve) · Lado de La Cascada · Isla Sur-Este Stand 18 (5,0 m²). Más de 20 años de trayectoria en Venezuela distribuyendo semillas certificadas, líneas biológicas y orgánicas, fungicidas, insecticidas, herbicidas y coadyuvantes.',
+    logo_url: '/assets/sponsors/logo-agrinova.png',
+    instagram: '@agrinovaca',
+    whatsapp: '+58 424 7100779',
+    stand_code: '18',
     status: 'confirmado',
   },
   {
@@ -214,14 +298,151 @@ export const INITIAL_EXHIBITORS: ExhibitorRecord[] = [
     level: 'patrocinador',
     sector: 'Plataforma Digital Agroalimentaria y Bolsa Agrícola',
     description:
-      'Aliado Tecnológico y Presentador Digital Oficial ("El precio justo de tu cosecha"). Plataforma nacida en La Grita que publica cada domingo los precios oficiales de 57 rubros de la Bolsa Agrícola en USD, VES y COP, conectando a agricultores, compradores mayoristas y transportistas con 0 % de comisión.',
+      'Aliado Tecnológico y Presentador Digital Oficial ("El precio justo de tu cosecha") · Lado de La Cascada · Isla Sur-Este Stand 11 (5,0 m²). Plataforma nacida en La Grita que publica cada domingo los precios oficiales de 57 rubros de la Bolsa Agrícola en USD, VES y COP con 0 % de comisión.',
     logo_url: '/assets/aistudio/agromarket-post-blanco-simple_ab5a7228.png',
     instagram: '@agromarket.ve',
     whatsapp: '+58 424 7100779',
-    stand_code: '03',
+    stand_code: '11',
     status: 'confirmado',
   },
-  // 2. Institutional (4)
+  {
+    id: 'org-tecno-agua',
+    name: 'Tecno Agua (Tecnoagua)',
+    level: 'expositor',
+    sector: 'Tecnología Hídrica y Sistemas de Riego',
+    description:
+      'Lado de La Cascada · Isla Sur-Este Stand 20 (5,0 m²). Especialistas en sistemas de riego tecnificado, bombeo solar y eléctrico, fertirriego y gestión eficiente del agua para cultivos de montaña.',
+    logo_url: '/assets/sponsors/logo-tecnoagua.svg',
+    instagram: '@tecnoagua1',
+    whatsapp: '+58 414 7589270',
+    stand_code: '20',
+    status: 'confirmado',
+  },
+  {
+    id: 'org-inarvet',
+    name: 'Inarvet / Narbhed (Por confirmar)',
+    level: 'expositor',
+    sector: 'Salud Animal, Biológicos e Insumos Agropecuarios',
+    description:
+      'Lado de La Cascada · Isla Sur-Este Stand 09 (Pre-asignado · Por confirmar). Soluciones veterinarias, nutrición y sanidad animal para la ganadería de altura y producción agropecuaria andina.',
+    logo_url: '/assets/sponsors/logo-inarvet.svg',
+    instagram: null,
+    whatsapp: '+58 414 7130598',
+    stand_code: '09',
+    status: 'por_reconfirmar',
+  },
+  {
+    id: 'org-agropaca',
+    name: 'Agropaca · Cosechando tu futuro',
+    level: 'patrocinador',
+    sector: 'Nutrición Vegetal, Fertilizantes y Silos',
+    description:
+      'Agropaca Venezuela (agropaca.com). Comercializadora e importadora agrícola especialista en fertilizantes granulados y solubles, análisis de suelos y foliares, protección de cultivos y soluciones integrales de nutrición vegetal para los valles altos andinos.',
+    logo_url: '/assets/sponsors/logo-agropaca.png',
+    instagram: '@agropaca_venezuela',
+    whatsapp: '+58 414 7130598',
+    stand_code: null,
+    status: 'confirmado',
+  },
+
+  // ===========================================================================
+  // 3. APOYO INSTITUCIONAL, GREMIAL Y ACADÉMICO (7 Colaboradores Oficiales del Flyer)
+  // ===========================================================================
+  {
+    id: 'org-sviaa',
+    name: 'SVIAA · Sociedad Venezolana de Ingenieros Agrónomos y Afines',
+    level: 'aliado',
+    sector: 'Gremio Profesional y Académico',
+    description:
+      'Sociedad Venezolana de Ingenieros Agrónomos y Afines. Co-organizadora académica del Simposio Agrovisión 360° y del ciclo de conferencias magistrales de la Expo Agroalimentaria La Grita 2026.',
+    logo_url: '/assets/sponsors/logo-sviaa.svg',
+    instagram: '@sviaa_oficial',
+    whatsapp: null,
+    stand_code: null,
+    status: 'confirmado',
+  },
+  {
+    id: 'org-civ',
+    name: 'Colegio de Ingenieros de Venezuela (CIV · 1861)',
+    level: 'aliado',
+    sector: 'Gremio Profesional e Ingeniería',
+    description:
+      'Colegio de Ingenieros de Venezuela y Centro de Ingenieros del Estado Táchira (CIET). Respaldo institucional y técnico en infraestructura, agrotecnología y formación profesional.',
+    logo_url: '/assets/sponsors/logo-civ.svg',
+    instagram: '@cietachira',
+    whatsapp: null,
+    stand_code: null,
+    status: 'confirmado',
+  },
+  {
+    id: 'org-unet',
+    name: 'UNET · Universidad Nacional Experimental del Táchira',
+    level: 'aliado',
+    sector: 'Academia e Investigación Agropecuaria',
+    description:
+      'Universidad Nacional Experimental del Táchira. Casa de estudios superiores líder en ingeniería agronómica, producción animal, agroindustria e investigación aplicada en la región andina.',
+    logo_url: '/assets/sponsors/logo-unet.svg',
+    instagram: '@unet_oficial',
+    whatsapp: null,
+    stand_code: null,
+    status: 'confirmado',
+  },
+  {
+    id: 'org-biomundo',
+    name: 'Fundación Biomundo',
+    level: 'aliado',
+    sector: 'Sostenibilidad, Agroecología y Ambiente',
+    description:
+      'Fundación dedicada a la conservación ambiental, educación ecológica, regeneración de ecosistemas de montaña y promoción de modelos agroproductivos sostenibles.',
+    logo_url: '/assets/sponsors/logo-biomundo.svg',
+    instagram: '@fundacionbiomundo',
+    whatsapp: null,
+    stand_code: null,
+    status: 'confirmado',
+  },
+  {
+    id: 'org-modat',
+    name: 'MODAT · Movimiento Agroproductivo del Táchira',
+    level: 'aliado',
+    sector: 'Gremio y Articulación de Productores',
+    description:
+      'Movimiento de articulación gremial y defensa del productor agropecuario tachirense, impulsando la soberanía agroalimentaria y el desarrollo rural de los municipios de montaña.',
+    logo_url: '/assets/sponsors/logo-modat.svg',
+    instagram: null,
+    whatsapp: null,
+    stand_code: null,
+    status: 'confirmado',
+  },
+  {
+    id: 'org-unesr',
+    name: 'UNESR · Universidad Nacional Experimental Simón Rodríguez',
+    level: 'aliado',
+    sector: 'Academia e Investigación (Núcleo La Grita)',
+    description:
+      'Universidad Nacional Experimental Simón Rodríguez, con presencia activa en el municipio Jáuregui formando profesionales en desarrollo agroecológico, administración de fincas y educación rural.',
+    logo_url: '/assets/sponsors/logo-unesr.svg',
+    instagram: '@unesroficial',
+    whatsapp: null,
+    stand_code: null,
+    status: 'confirmado',
+  },
+  {
+    id: 'org-unellez',
+    name: 'UNELLEZ · Universidad Nacional Experimental de los Llanos Occidentales Ezequiel Zamora',
+    level: 'aliado',
+    sector: 'Academia e Investigación Agroindustrial',
+    description:
+      'La Universidad que Siembra. Referente académico en ciencias del agro, suelos, extensión rural e integración productiva entre el piedemonte andino y los llanos occidentales.',
+    logo_url: '/assets/sponsors/logo-unellez.svg',
+    instagram: '@unellezoficial',
+    whatsapp: null,
+    stand_code: null,
+    status: 'confirmado',
+  },
+
+  // ===========================================================================
+  // 4. PRE-ANNOUNCED INSTITUTIONS, ALLIES & EXHIBITORS (por_reconfirmar)
+  // ===========================================================================
   {
     id: 'org-mppat',
     name: 'MPPAT y entes adscritos (SUNAGRO, INSAI, INIA, CVC, CSC, IAPRET, CVAUP)',
@@ -270,7 +491,6 @@ export const INITIAL_EXHIBITORS: ExhibitorRecord[] = [
     stand_code: null,
     status: 'por_reconfirmar',
   },
-  // 3. Allies (6)
   {
     id: 'org-apropatachira',
     name: 'Apropatáchira',
@@ -279,18 +499,6 @@ export const INITIAL_EXHIBITORS: ExhibitorRecord[] = [
     description: 'Asociación de Productores de Papa del Estado Táchira.',
     logo_url: null,
     instagram: '@apropatachira',
-    whatsapp: null,
-    stand_code: null,
-    status: 'por_reconfirmar',
-  },
-  {
-    id: 'org-unet',
-    name: 'UNET',
-    level: 'aliado',
-    sector: 'Academia e investigación',
-    description: 'Universidad Nacional Experimental del Táchira.',
-    logo_url: null,
-    instagram: '@unet_oficial',
     whatsapp: null,
     stand_code: null,
     status: 'por_reconfirmar',
@@ -332,19 +540,6 @@ export const INITIAL_EXHIBITORS: ExhibitorRecord[] = [
     status: 'por_reconfirmar',
   },
   {
-    id: 'org-unellez',
-    name: 'UNELLEZ',
-    level: 'aliado',
-    sector: 'Academia e investigación',
-    description: 'Universidad Nacional Experimental de los Llanos Occidentales Ezequiel Zamora.',
-    logo_url: null,
-    instagram: null,
-    whatsapp: null,
-    stand_code: null,
-    status: 'por_reconfirmar',
-  },
-  // 4. Exhibitors (13)
-  {
     id: 'org-mack',
     name: 'Mack de Venezuela / DFT Autocamiones',
     level: 'expositor',
@@ -376,54 +571,6 @@ export const INITIAL_EXHIBITORS: ExhibitorRecord[] = [
     description: 'Soluciones y acompañamiento para producción agrícola sostenible.',
     logo_url: null,
     instagram: '@agrosus9',
-    whatsapp: null,
-    stand_code: null,
-    status: 'por_reconfirmar',
-  },
-  {
-    id: 'org-tecno-agua',
-    name: 'Tecno Agua',
-    level: 'expositor',
-    sector: 'Tecnología hídrica',
-    description: 'Sistemas de riego, bombeo y gestión del agua en el campo.',
-    logo_url: null,
-    instagram: '@tecnoagua1',
-    whatsapp: null,
-    stand_code: null,
-    status: 'por_reconfirmar',
-  },
-  {
-    id: 'org-agro-insumos-tachira',
-    name: 'Agro Insumos del Táchira',
-    level: 'expositor',
-    sector: 'Insumos agrícolas',
-    description: 'Semillas, fertilizantes y protección de cultivos en los Andes.',
-    logo_url: null,
-    instagram: '@agroinsumostach',
-    whatsapp: null,
-    stand_code: null,
-    status: 'por_reconfirmar',
-  },
-  {
-    id: 'org-aldefrio',
-    name: 'Aldefrio',
-    level: 'expositor',
-    sector: 'Agroindustria y refrigeración',
-    description: 'Cadena de frío y equipamiento de refrigeración comercial e industrial.',
-    logo_url: null,
-    instagram: '@aldefrioca',
-    whatsapp: null,
-    stand_code: null,
-    status: 'por_reconfirmar',
-  },
-  {
-    id: 'org-helados-la-cascada',
-    name: 'Helados La Cascada',
-    level: 'expositor',
-    sector: 'Alimentos y lácteos',
-    description: 'Producción y distribución de helados y derivados lácteos.',
-    logo_url: null,
-    instagram: '@heladoslacascada',
     whatsapp: null,
     stand_code: null,
     status: 'por_reconfirmar',
@@ -484,18 +631,6 @@ export const INITIAL_EXHIBITORS: ExhibitorRecord[] = [
     description: 'Equipamiento y suministros para el sector productivo.',
     logo_url: null,
     instagram: '@mardufre',
-    whatsapp: null,
-    stand_code: null,
-    status: 'por_reconfirmar',
-  },
-  {
-    id: 'org-agrollano',
-    name: 'Agrollano',
-    level: 'expositor',
-    sector: 'Insumos y maquinaria',
-    description: 'Soluciones agropecuarias e insumos para el productor tachirense.',
-    logo_url: null,
-    instagram: '@agrollano_tachira',
     whatsapp: null,
     stand_code: null,
     status: 'por_reconfirmar',

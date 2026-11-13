@@ -106,7 +106,7 @@ export const MaquetteHeroStill: React.FC<MaquetteHeroStillProps> = ({ onExploreC
                   Foto real: Nave del Salón de Exposiciones (38,0 × 21,5 m)
                 </span>
                 <span className="rounded-[4px] bg-[#1995A2]/95 px-2.5 py-1 font-semibold text-white">
-                  51 Stands + 7 Mesas + Tarima Show Bisnet
+                  41 Stands + 6 Mesas + Área Conferencias
                 </span>
               </div>
             </div>
@@ -118,7 +118,7 @@ export const MaquetteHeroStill: React.FC<MaquetteHeroStillProps> = ({ onExploreC
             viewBox="0 0 800 500"
             className="w-full h-auto block aspect-[16/10]"
             role="img"
-            aria-label="Esquema axonométrico con las medidas exactas del Casino Militar: Salón de Exposición de 38 por 21,5 m con 51 stands, Salón de Conferencias y 8 zonas de Expoauto"
+            aria-label="Esquema axonométrico con las medidas exactas del Casino Militar: Salón de Exposición de 38 por 21,5 m con 41 stands, Salón de Conferencias y 8 zonas de Expoauto"
           >
             <defs>
               <linearGradient id="skyFog" x1="0" y1="0" x2="0" y2="1">
@@ -165,7 +165,7 @@ export const MaquetteHeroStill: React.FC<MaquetteHeroStillProps> = ({ onExploreC
 
               <rect x="465" y="102" width="248" height="24" rx="3" fill="#0F3D22" stroke="#F4C20D" strokeWidth="1.2" />
               <text x="589" y="118" textAnchor="middle" fill="#EEF2EF" fontSize="11" fontWeight="700">
-                1. SALÓN EXPOSICIÓN (38×21,5 m · 51 STANDS)
+                1. SALÓN EXPOSICIÓN (38×21,5 m · 41 STANDS)
               </text>
             </g>
 
@@ -217,7 +217,7 @@ export const MaquetteHeroStill: React.FC<MaquetteHeroStillProps> = ({ onExploreC
       {/* Quick Measurements Summary Strip */}
       <div className="grid grid-cols-3 divide-x divide-[#EEF2EF]/15 border-t border-[#EEF2EF]/15 bg-[#0A2917]/90 text-center">
         <div className="px-2 py-2.5">
-          <p className="font-display-wide text-scale-16 text-[#F4C20D] tabular-nums">51 Stands</p>
+          <p className="font-display-wide text-scale-16 text-[#F4C20D] tabular-nums">41 Stands</p>
           <p className="text-[11px] text-[#EEF2EF]/80">7,50 m² ($480) y 5 m² ($400)</p>
         </div>
         <div className="px-2 py-2.5">
@@ -226,7 +226,7 @@ export const MaquetteHeroStill: React.FC<MaquetteHeroStillProps> = ({ onExploreC
         </div>
         <div className="px-2 py-2.5">
           <p className="font-display-wide text-scale-16 text-[#F4C20D] tabular-nums">38 × 21,5 m</p>
-          <p className="text-[11px] text-[#EEF2EF]/80">Salón Exposición + Show Bisnet</p>
+          <p className="text-[11px] text-[#EEF2EF]/80">Salón Exposición + Conferencias</p>
         </div>
       </div>
 

@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 150" width="360" height="150">
+    <rect width="360" height="150" rx="10" fill="#FFFFFF"/>
+    <!-- Golden wheat/sprout above the I -->
+    <g transform="translate(182, 10)">
+      <path d="M12 28 C4 18 4 6 12 0 C15 8 15 18 12 28 Z" fill="#D4A017"/>
+      <path d="M14 28 C22 20 24 8 18 2 C14 10 13 18 14 28 Z" fill="#EAB308"/>
+    </g>
+    <text x="180" y="92" text-anchor="middle" font-family="Arial Black, sans-serif" font-size="68" font-weight="900" fill="#0F6B50" letter-spacing="2">SVIAA</text>
+    <text x="180" y="116" text-anchor="middle" font-family="Arial, sans-serif" font-size="13.5" font-weight="700" fill="#374151" letter-spacing="0.6">SOCIEDAD VENEZOLANA DE INGENIEROS</text>
+    <text x="180" y="134" text-anchor="middle" font-family="Arial, sans-serif" font-size="13.5" font-weight="700" fill="#374151" letter-spacing="0.6">AGRÓNOMOS Y AFINES</text>
+  </svg>

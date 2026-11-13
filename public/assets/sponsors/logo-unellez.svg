@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 190" width="440" height="190">
+    <rect width="440" height="190" rx="12" fill="#FFFFFF"/>
+    <!-- Iconic Orange Stepped Stripes Emblem of UNELLEZ -->
+    <g transform="translate(18, 22)" fill="none" stroke="#E87722" stroke-width="4.5" stroke-linecap="square">
+      <path d="M28 8 V48 H8 V88 H58 V128 H108 V148"/>
+      <path d="M38 8 V56 H18 V80 H68 V120 H118 V148"/>
+      <path d="M48 8 V64 H28 V72 H78 V112 H128 V148"/>
+      <path d="M58 8 V48 H88 V104 H138 V148"/>
+      <path d="M68 8 V40 H98 V96 H148 V148"/>
+    </g>
+    <text x="172" y="54" font-family="Georgia, serif" font-size="15.5" font-weight="700" fill="#1F2937">Universidad Nacional Experimental</text>
+    <text x="195" y="76" font-family="Georgia, serif" font-size="15.5" font-weight="700" fill="#1F2937">de los Llanos Occidentales</text>
+    <text x="228" y="98" font-family="Georgia, serif" font-size="15.5" font-weight="700" fill="#1F2937">Ezequiel Zamora</text>
+    <text x="182" y="148" font-family="Georgia, Times New Roman, serif" font-size="48" font-weight="900" fill="#E87722" letter-spacing="2">UNELLEZ</text>
+  </svg>

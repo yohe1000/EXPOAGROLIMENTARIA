@@ -138,10 +138,10 @@ export const OrganizaPresentaLockup: React.FC<LockupProps> = ({
           </div>
           <div className="flex flex-col">
             <span className={`font-display-wide text-scale-14 leading-tight ${titleColor}`}>
-              Banco Sofitasa · BISA Biotecnología
+              BISA Biotecnología · Banco Sofitasa
             </span>
             <span className={`text-[12px] leading-tight ${captionColor}`}>
-              @bancosofitasa (Stand 01) · @bisa_ve (Stand 02)
+              @bisa_ve (Stands 01–02) · @bancosofitasa (Stands 13–16)
             </span>
           </div>
         </div>
@@ -182,12 +182,161 @@ interface OfficialSponsorsShowcaseProps {
   onSelectStandInPlan: (standCode: string) => void;
 }
 
+const CONFIRMED_BRANDS_SHOWCASE = [
+  {
+    id: 'agrollano',
+    name: 'Agrollano · El aliado del productor',
+    standLabel: 'Bloque Principal · Stands 03 y 04 (15,0 m²)',
+    standCode: '03',
+    sector: 'Insumos Agrícolas y Red de Agrotiendas',
+    logo: '/assets/sponsors/logo-agrollano.png',
+    instagram: '@grupo_agrollano',
+    statusBadge: 'Confirmado',
+    isPending: false,
+  },
+  {
+    id: 'wow',
+    name: 'WOW (Wao)',
+    standLabel: 'Bloque Principal · Stands 05 y 06 (15,0 m²)',
+    standCode: '05',
+    sector: 'Conectividad y Soluciones Comerciales',
+    logo: '/assets/sponsors/logo-wow.svg',
+    instagram: null,
+    statusBadge: 'Confirmado',
+    isPending: false,
+  },
+  {
+    id: 'la-cascada',
+    name: 'Helados La Cascada',
+    standLabel: 'Bloque Principal · Stands 07 y 08 (15,0 m²)',
+    standCode: '07',
+    sector: 'Agroindustria Láctea y Tradición de La Grita',
+    logo: '/assets/sponsors/logo-helados-la-cascada.png',
+    instagram: '@heladoslacascada',
+    statusBadge: 'Confirmado',
+    isPending: false,
+  },
+  {
+    id: 'agroinsumos-tachira',
+    name: 'Agro Insumos del Táchira',
+    standLabel: 'Lado de La Cascada · Stand 17 (5,0 m²)',
+    standCode: '17',
+    sector: 'Semillas, Fertilizantes y Suministros Andinos',
+    logo: '/assets/sponsors/logo-agroinsumos-tachira.svg',
+    instagram: '@agroinsumostach',
+    statusBadge: 'Confirmado',
+    isPending: false,
+  },
+  {
+    id: 'aldefrio',
+    name: 'Aldefrio C.A. (Al de Frío)',
+    standLabel: 'Lado de La Cascada · Stand 12 (5,0 m²)',
+    standCode: '12',
+    sector: 'Refrigeración Industrial y Cadena de Frío',
+    logo: '/assets/sponsors/logo-aldefrio.svg',
+    instagram: '@aldefrioca',
+    statusBadge: 'Confirmado',
+    isPending: false,
+  },
+  {
+    id: 'agrinova',
+    name: 'Agrinova · Agricultura e Innovación',
+    standLabel: 'Lado de La Cascada · Stand 18 (5,0 m²)',
+    standCode: '18',
+    sector: 'Semillas Certificadas y Protección de Cultivos',
+    logo: '/assets/sponsors/logo-agrinova.png',
+    instagram: '@agrinovaca',
+    statusBadge: 'Confirmado',
+    isPending: false,
+  },
+  {
+    id: 'tecnoagua',
+    name: 'Tecno Agua (Tecnoagua)',
+    standLabel: 'Lado de La Cascada · Stand 20 (5,0 m²)',
+    standCode: '20',
+    sector: 'Tecnología Hídrica y Sistemas de Riego',
+    logo: '/assets/sponsors/logo-tecnoagua.svg',
+    instagram: '@tecnoagua1',
+    statusBadge: 'Confirmado',
+    isPending: false,
+  },
+  {
+    id: 'inarvet',
+    name: 'Inarvet / Narbhed',
+    standLabel: 'Lado de La Cascada · Stand 09 (5,0 m²)',
+    standCode: '09',
+    sector: 'Sanidad Animal e Insumos Agropecuarios',
+    logo: '/assets/sponsors/logo-inarvet.svg',
+    instagram: null,
+    statusBadge: 'Por confirmar',
+    isPending: true,
+  },
+  {
+    id: 'agropaca',
+    name: 'Agropaca · Cosechando tu futuro',
+    standLabel: 'Patrocinador Confirmado',
+    standCode: null,
+    sector: 'Nutrición Vegetal, Fertilizantes y Silos',
+    logo: '/assets/sponsors/logo-agropaca.png',
+    instagram: '@agropaca_venezuela',
+    statusBadge: 'Confirmado',
+    isPending: false,
+  },
+] as const;
+
+const OFFICIAL_COLLABORATORS = [
+  {
+    id: 'sviaa',
+    acronym: 'SVIAA',
+    name: 'Sociedad Venezolana de Ingenieros Agrónomos y Afines',
+    logo: '/assets/sponsors/logo-sviaa.svg',
+  },
+  {
+    id: 'civ',
+    acronym: 'CIV · 1861',
+    name: 'Colegio de Ingenieros de Venezuela',
+    logo: '/assets/sponsors/logo-civ.svg',
+  },
+  {
+    id: 'unet',
+    acronym: 'UNET',
+    name: 'Universidad Nacional Experimental del Táchira',
+    logo: '/assets/sponsors/logo-unet.svg',
+  },
+  {
+    id: 'biomundo',
+    acronym: 'Fundación Biomundo',
+    name: 'Sostenibilidad, Agroecología y Ambiente',
+    logo: '/assets/sponsors/logo-biomundo.svg',
+  },
+  {
+    id: 'modat',
+    acronym: 'MODAT',
+    name: 'Movimiento Agroproductivo del Táchira',
+    logo: '/assets/sponsors/logo-modat.svg',
+  },
+  {
+    id: 'unesr',
+    acronym: 'UNESR',
+    name: 'Universidad Nacional Experimental Simón Rodríguez',
+    logo: '/assets/sponsors/logo-unesr.svg',
+  },
+  {
+    id: 'unellez',
+    acronym: 'UNELLEZ',
+    name: 'Universidad Nacional Experimental de los Llanos Occidentales Ezequiel Zamora',
+    logo: '/assets/sponsors/logo-unellez.svg',
+  },
+] as const;
+
 /**
  * Prominent showcase section for the two Grand Official Sponsors:
- * 1. BISA · Biotecnología y Sostenibilidad Avanzada (@bisa_ve — Biocentro de Soluciones Agroecológicas, C.A.)
- * 2. Banco Sofitasa · Banco Universal (@bancosofitasa — "El Banco de los Andes")
+ * 1. BISA · Biotecnología y Sostenibilidad Avanzada (@bisa_ve — Stands 01 y 02)
+ * 2. Banco Sofitasa · Banco Universal (@bancosofitasa — Stands 13, 14, 15 y 16)
  * alongside the Official Digital Presenter:
- * 3. AgroMarket (@agromarket.ve · agromarket.com.ve — "El precio justo de tu cosecha")
+ * 3. AgroMarket (@agromarket.ve — Stand 11)
+ * plus the Confirmed Brands Grid (Bloque Principal & Lado de La Cascada)
+ * and the 7 Official Collaborators ("Apoyo / Colaboradores").
  */
 export const OfficialSponsorsShowcase: React.FC<OfficialSponsorsShowcaseProps> = ({
   onSelectStandInPlan,
@@ -210,10 +359,10 @@ export const OfficialSponsorsShowcase: React.FC<OfficialSponsorsShowcaseProps> =
               id="sponsors-heading"
               className="mt-3 font-display-wide text-scale-31 sm:text-scale-39 text-[#1F2421]"
             >
-              Patrocinadores Oficiales Principales y Presentador Digital
+              Patrocinadores Oficiales, Expositores Confirmados y Colaboradores
             </h2>
             <p className="mt-2 text-scale-16 text-[#1F2421]/85">
-              Las dos grandes marcas líderes que impulsan la transformación productiva de los Andes venezolanos —<strong>BISA Biotecnología (@bisa_ve)</strong> y <strong>Banco Sofitasa (@bancosofitasa)</strong>— junto a <strong>AgroMarket (@agromarket.ve)</strong> como plataforma tecnológica presentadora oficial del evento.
+              Las grandes marcas líderes que impulsan la transformación productiva de los Andes venezolanos —<strong>BISA Biotecnología (@bisa_ve · Stands 01–02)</strong> y <strong>Banco Sofitasa (@bancosofitasa · Stands 13–16)</strong>— junto a <strong>AgroMarket (@agromarket.ve · Stand 11)</strong>, las empresas del Bloque Principal y Lado de La Cascada, y los 7 gremios y universidades colaboradoras.
             </p>
           </div>
 
@@ -247,7 +396,7 @@ export const OfficialSponsorsShowcase: React.FC<OfficialSponsorsShowcaseProps> =
                   PATROCINADOR OFICIAL PRINCIPAL
                 </span>
                 <span className="font-display-wide text-scale-16 tabular-nums text-[#0F3D22]">
-                  Stand Flagship 02 · 7,50 m²
+                  Bloque Principal · Stands 01 y 02 (15,0 m²)
                 </span>
               </div>
 
@@ -332,11 +481,11 @@ export const OfficialSponsorsShowcase: React.FC<OfficialSponsorsShowcaseProps> =
             <div className="mt-6 flex flex-wrap items-center gap-3 border-t border-[#1E7A34]/20 pt-4">
               <button
                 type="button"
-                onClick={() => onSelectStandInPlan('02')}
+                onClick={() => onSelectStandInPlan('01')}
                 className="inline-flex min-h-[44px] items-center justify-center gap-2 rounded-[4px] bg-[#1E7A34] px-4 py-2.5 text-scale-14 font-semibold text-white hover:bg-[#0F3D22] transition-colors"
               >
                 <MapPin className="h-4 w-4 shrink-0" aria-hidden="true" />
-                Ubicar Stand 02 (BISA) en la Maqueta
+                Ubicar Stands 01 y 02 (BISA) en la Maqueta
               </button>
               <a
                 href="https://www.instagram.com/bisa_ve/"
@@ -363,7 +512,7 @@ export const OfficialSponsorsShowcase: React.FC<OfficialSponsorsShowcaseProps> =
                   PATROCINADOR OFICIAL PRINCIPAL
                 </span>
                 <span className="font-display-wide text-scale-16 tabular-nums text-[#1F4E9C]">
-                  Stand Flagship 01 · 7,50 m²
+                  Isla Central · Stands 13, 14, 15 y 16 (20,0 m²)
                 </span>
               </div>
 
@@ -448,11 +597,11 @@ export const OfficialSponsorsShowcase: React.FC<OfficialSponsorsShowcaseProps> =
             <div className="mt-6 flex flex-wrap items-center gap-3 border-t border-[#1F4E9C]/20 pt-4">
               <button
                 type="button"
-                onClick={() => onSelectStandInPlan('01')}
+                onClick={() => onSelectStandInPlan('13')}
                 className="inline-flex min-h-[44px] items-center justify-center gap-2 rounded-[4px] bg-[#1F4E9C] px-4 py-2.5 text-scale-14 font-semibold text-white hover:bg-[#153875] transition-colors"
               >
                 <MapPin className="h-4 w-4 shrink-0" aria-hidden="true" />
-                Ubicar Stand 01 (Banco Sofitasa) en la Maqueta
+                Ubicar Stands 13–16 (Banco Sofitasa) en la Maqueta
               </button>
               <a
                 href="https://www.instagram.com/bancosofitasa/"
@@ -480,7 +629,7 @@ export const OfficialSponsorsShowcase: React.FC<OfficialSponsorsShowcaseProps> =
                   PRESENTADOR DIGITAL OFICIAL · ALIADO TECNOLÓGICO
                 </span>
                 <span className="font-display-wide text-scale-14 text-[#F4C20D]">
-                  Stand Flagship 03 · 7,50 m²
+                  Lado de La Cascada · Stand 11 · 5,00 m²
                 </span>
               </div>
 
@@ -508,7 +657,7 @@ export const OfficialSponsorsShowcase: React.FC<OfficialSponsorsShowcaseProps> =
                 <div className="rounded-[8px] border border-[#EEF2EF]/15 bg-[#144A29] p-3.5">
                   <p className="font-bold text-[#F4C20D]">Transmisión Dom 22 Nov</p>
                   <p className="mt-1 text-[13px] text-[#EEF2EF]/85">
-                    Corte dominical de la Bolsa Agrícola en vivo desde la tarima Show Bisnet en el cierre de la Expo.
+                    Corte dominical de la Bolsa Agrícola en vivo desde el Salón de Conferencias en el cierre de la Expo.
                   </p>
                 </div>
               </div>
@@ -516,11 +665,11 @@ export const OfficialSponsorsShowcase: React.FC<OfficialSponsorsShowcaseProps> =
               <div className="mt-6 flex flex-wrap items-center gap-3">
                 <button
                   type="button"
-                  onClick={() => onSelectStandInPlan('03')}
+                  onClick={() => onSelectStandInPlan('11')}
                   className="inline-flex min-h-[44px] items-center justify-center gap-2 rounded-[4px] bg-[#F4C20D] px-4 py-2.5 font-agromarket text-scale-14 font-bold text-[#1F2421] hover:bg-[#e5b408] transition-colors"
                 >
                   <MapPin className="h-4 w-4 shrink-0" aria-hidden="true" />
-                  Ubicar Stand 03 (AgroMarket) en la Maqueta
+                  Ubicar Stand 11 (AgroMarket) en la Maqueta
                 </button>
                 <a
                   href="#precios-bolsa"
@@ -575,6 +724,129 @@ export const OfficialSponsorsShowcase: React.FC<OfficialSponsorsShowcaseProps> =
             </div>
           </div>
         </article>
+
+        {/* CONFIRMED COMMERCIAL BRANDS & STAND ASSIGNMENTS GRID (Bloque Principal & Lado de La Cascada) */}
+        <div className="mt-10 rounded-[12px] border border-[#1F2421]/15 bg-[#EEF2EF]/60 p-6 sm:p-8">
+          <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[#1F2421]/15 pb-4">
+            <div>
+              <span className="text-[12px] font-extrabold uppercase tracking-wider text-[#1E7A34]">
+                Planimetría Oficial del Salón de Exposiciones
+              </span>
+              <h3 className="font-display-wide text-scale-25 text-[#1F2421]">
+                Marcas Confirmadas · Bloque Principal y Lado de La Cascada
+              </h3>
+            </div>
+            <span className="rounded-[4px] bg-[#0F3D22] px-3 py-1 text-scale-14 font-semibold text-[#F4C20D]">
+              Logos Oficiales y Ubicación de Stands
+            </span>
+          </div>
+
+          <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {CONFIRMED_BRANDS_SHOWCASE.map((item) => (
+              <div
+                key={item.id}
+                className="flex flex-col justify-between rounded-[10px] border border-[#1F2421]/15 bg-white p-4 shadow-xs"
+              >
+                <div>
+                  <div className="flex items-center justify-between gap-2">
+                    <span className="rounded-[4px] bg-[#EEF2EF] px-2.5 py-0.5 text-[11px] font-bold text-[#0F3D22]">
+                      {item.standLabel}
+                    </span>
+                    <span
+                      className={`rounded-[4px] px-2 py-0.5 text-[11px] font-bold ${
+                        item.isPending
+                          ? 'bg-[#FDF6E7] text-[#9A5512] border border-[#E8A317]/40'
+                          : 'bg-[#EBF7EE] text-[#1E7A34]'
+                      }`}
+                    >
+                      {item.statusBadge}
+                    </span>
+                  </div>
+
+                  <div className="mt-3 flex h-24 items-center justify-center rounded-[8px] border border-[#1F2421]/10 bg-[#FAFBF9] p-3">
+                    <img
+                      src={item.logo}
+                      alt={`Logo oficial de ${item.name}`}
+                      loading="lazy"
+                      className="max-h-18 w-auto max-w-full object-contain"
+                    />
+                  </div>
+
+                  <h4 className="mt-3 font-display-wide text-scale-16 text-[#1F2421]">
+                    {item.name}
+                  </h4>
+                  <p className="mt-0.5 text-[13px] text-[#1F2421]/75">{item.sector}</p>
+                </div>
+
+                <div className="mt-4 flex flex-wrap items-center justify-between gap-2 border-t border-[#1F2421]/10 pt-3">
+                  {item.standCode ? (
+                    <button
+                      type="button"
+                      onClick={() => onSelectStandInPlan(item.standCode)}
+                      className="inline-flex items-center gap-1.5 text-[13px] font-bold text-[#1E7A34] hover:text-[#0F3D22] underline"
+                    >
+                      <MapPin className="h-3.5 w-3.5" aria-hidden="true" />
+                      Ver en el plano (Stand {item.standCode})
+                    </button>
+                  ) : (
+                    <span className="text-[12px] font-semibold text-[#1F2421]/70">
+                      Patrocinador Oficial
+                    </span>
+                  )}
+                  {item.instagram && (
+                    <span className="text-[12px] font-medium text-[#1F4E9C]">
+                      {item.instagram}
+                    </span>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* OFFICIAL COLLABORATORS BAR ("APOYO / COLABORADORES" FROM THE FLYER BOTTOM STRIP) */}
+        <div
+          data-testid="collaborators-showcase"
+          className="mt-8 rounded-[12px] border-2 border-[#0F3D22]/20 bg-white p-6 sm:p-8 shadow-xs"
+        >
+          <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between border-b border-[#1F2421]/10 pb-4">
+            <div>
+              <span className="text-[12px] font-extrabold uppercase tracking-wider text-[#1E7A34]">
+                Apoyo Institucional, Gremial y Académico Oficial
+              </span>
+              <h3 className="font-display-wide text-scale-25 text-[#1F2421]">
+                Colaboradores y Co-Organizadores Académicos
+              </h3>
+            </div>
+            <span className="text-scale-14 font-semibold text-[#0F3D22]">
+              7 Instituciones Confirmadas · Simposio Agrovisión 360°
+            </span>
+          </div>
+
+          <div className="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7">
+            {OFFICIAL_COLLABORATORS.map((col) => (
+              <div
+                key={col.id}
+                className="flex flex-col items-center justify-between rounded-[10px] border border-[#1F2421]/12 bg-[#FAFBF9] p-3 text-center transition-colors hover:border-[#1E7A34]"
+              >
+                <div className="flex h-20 w-full items-center justify-center p-1">
+                  <img
+                    src={col.logo}
+                    alt={`Logo oficial de ${col.name}`}
+                    loading="lazy"
+                    className="max-h-16 w-auto max-w-full object-contain"
+                  />
+                </div>
+                <div className="mt-2 border-t border-[#1F2421]/10 pt-2 w-full">
+                  <p className="font-display-wide text-[13px] text-[#0F3D22]">{col.acronym}</p>
+                  <p className="mt-0.5 text-[11px] leading-tight text-[#1F2421]/75 line-clamp-2">
+                    {col.name}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     </section>
   );

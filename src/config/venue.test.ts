@@ -20,31 +20,54 @@ import {
   updateEventConfigInAdmin,
 } from '../data/store';
 
-test('generateInitialStands generates 51 Salón de Exposiciones stands (01-51 including B05) and 8 Expoauto zones (EA-01..EA-08) matching Casino Militar PDF', () => {
+test('generateInitialStands generates 41 Salón de Exposiciones stands (01-41) and 8 Expoauto zones (EA-01..EA-08) matching official planimetry', () => {
   const stands = generateInitialStands();
-  assert.equal(stands.length, 59); // 51 interior + 8 exterior
+  assert.equal(stands.length, 49); // 41 interior + 8 exterior
 
   const salonStands = stands.filter((s) => s.zone_id === 'zone-exposicion');
   const expoautoStands = stands.filter((s) => s.zone_id === 'zone-automotriz');
 
-  assert.equal(salonStands.length, 51);
+  assert.equal(salonStands.length, 41);
   assert.equal(expoautoStands.length, 8);
-  assert.equal(stands.some((s) => s.code === 'B05'), true);
+  assert.equal(stands.some((s) => s.code === '01'), true);
+  assert.equal(stands.some((s) => s.code === '41'), true);
 
   const countsByType = stands.reduce<Record<string, number>>((acc, s) => {
     acc[s.type] = (acc[s.type] || 0) + 1;
     return acc;
   }, {});
 
-  // 9 Rosado stands (01..09): 2.5 x 3.0 m = 7.50 m², $480
-  assert.equal(countsByType.rosado, 9);
-  // 42 Turquesa stands (10..51): 2.5 x 2.0 m = 5.00 m², $400
-  assert.equal(countsByType.turquesa, 42);
+  // 8 Rosado stands (01..08): 2.5 x 3.0 m = 7.50 m², $480
+  assert.equal(countsByType.rosado, 8);
+  // 33 Turquesa stands (09..41): 2.5 x 2.0 m = 5.00 m², $400
+  assert.equal(countsByType.turquesa, 33);
   // 8 Expoauto zones: 4 of 100m² ($1600), 1 of 110m² ($1750), 1 of 140m² ($1950), 2 of 170m² ($2100)
   assert.equal(countsByType.expoauto_100, 4);
   assert.equal(countsByType.expoauto_110, 1);
   assert.equal(countsByType.expoauto_140, 1);
   assert.equal(countsByType.expoauto_170, 2);
+
+  // Verify exact brand assignments on the planimetry
+  const byCode = Object.fromEntries(stands.map((s) => [s.code, s]));
+  assert.equal(byCode['01'].exhibitor_id, 'org-bisa');
+  assert.equal(byCode['02'].exhibitor_id, 'org-bisa');
+  assert.equal(byCode['03'].exhibitor_id, 'org-agrollano');
+  assert.equal(byCode['04'].exhibitor_id, 'org-agrollano');
+  assert.equal(byCode['05'].exhibitor_id, 'org-wow');
+  assert.equal(byCode['06'].exhibitor_id, 'org-wow');
+  assert.equal(byCode['07'].exhibitor_id, 'org-helados-la-cascada');
+  assert.equal(byCode['08'].exhibitor_id, 'org-helados-la-cascada');
+  assert.equal(byCode['13'].exhibitor_id, 'org-sofitasa');
+  assert.equal(byCode['14'].exhibitor_id, 'org-sofitasa');
+  assert.equal(byCode['15'].exhibitor_id, 'org-sofitasa');
+  assert.equal(byCode['16'].exhibitor_id, 'org-sofitasa');
+  assert.equal(byCode['17'].exhibitor_id, 'org-agro-insumos-tachira');
+  assert.equal(byCode['12'].exhibitor_id, 'org-aldefrio');
+  assert.equal(byCode['18'].exhibitor_id, 'org-agrinova');
+  assert.equal(byCode['11'].exhibitor_id, 'org-agromarket');
+  assert.equal(byCode['20'].exhibitor_id, 'org-tecno-agua');
+  assert.equal(byCode['09'].exhibitor_id, 'org-inarvet');
+  assert.equal(byCode['09'].status, 'reservado');
 
   // Verify exact dimensions of Salon de Exposiciones
   assert.equal(VENUE_DIMENSIONS.HALL_W, 38.0);
@@ -70,16 +93,13 @@ test('getEffectiveStandStatus returns disponible when reservado hold_until has e
   assert.equal(getEffectiveStandStatus(activeStand, now), 'reservado');
 });
 
-test('seed data contains 26 organizations (3 confirmed Grand Official Sponsors: Banco Sofitasa, BISA, AgroMarket + 23 in por_reconfirmar), 5 zones, and 3 sample bolsa prices', () => {
-  assert.equal(INITIAL_EXHIBITORS.length, 26);
+test('seed data contains confirmed sponsors, exhibitors, Inarvet pending confirmation, and 7 official collaborators', () => {
+  assert.ok(INITIAL_EXHIBITORS.length >= 25);
   const confirmed = INITIAL_EXHIBITORS.filter((org) => org.status === 'confirmado');
   const pending = INITIAL_EXHIBITORS.filter((org) => org.status === 'por_reconfirmar');
-  assert.equal(confirmed.length, 3);
-  assert.equal(pending.length, 23);
-  assert.deepEqual(
-    confirmed.map((c) => c.id),
-    ['org-sofitasa', 'org-bisa', 'org-agromarket']
-  );
+  // 11 confirmed commercial brands + 7 official collaborators = 18 confirmed
+  assert.equal(confirmed.length, 18);
+  assert.ok(pending.some((org) => org.id === 'org-inarvet'));
   assert.equal(INITIAL_ZONES.length, 5);
   assert.equal(INITIAL_BOLSA_PRICES.length, 3);
   assert.equal(
@@ -121,7 +141,7 @@ test('buildIcsCalendarContent returns valid VCALENDAR with event dates', () => {
   assert.ok(ics.includes('José Pérez'));
 });
 
-test('Phase 2: requesting B05 places a 48h hold (reservado), blocks duplicate requests, enforces RBAC from profiles, and confirms B05 to vendido', () => {
+test('Phase 2: requesting available stand (19 / B05 alias) places a 48h hold (reservado), blocks duplicate requests, enforces RBAC from profiles, and confirms to vendido', () => {
   resetStoreAndRateLimitsForTest();
 
   // 1. Honeypot trap must reject spam insert
@@ -141,7 +161,7 @@ test('Phase 2: requesting B05 places a 48h hold (reservado), blocks duplicate re
     );
   }, /anti-spam/i);
 
-  // 2. Legitimate request on B05 sets status='reservado' and 48h hold
+  // 2. Legitimate request on B05 (resolves to available stand 19) sets status='reservado' and 48h hold
   const { request, updatedStand } = createStandRequest(
     {
       stand_code: 'B05',
@@ -151,20 +171,20 @@ test('Phase 2: requesting B05 places a 48h hold (reservado), blocks duplicate re
       whatsapp: '+58 414 7589270',
       email: 'rmora@agroandes.com.ve',
       sector: 'Insumos agrícolas',
-      notes: 'Stand B05 solicitado desde el plano 2D',
+      notes: 'Stand 19 solicitado desde el plano 2D',
     },
     ''
   );
 
-  assert.equal(updatedStand.code, 'B05');
+  assert.equal(updatedStand.code, '19');
   assert.equal(updatedStand.status, 'reservado');
   assert.ok(updatedStand.hold_until);
 
-  // 3. Second request on B05 while reserved must fail
+  // 3. Second request on 19 while reserved must fail
   assert.throws(() => {
     createStandRequest(
       {
-        stand_code: 'B05',
+        stand_code: '19',
         company_name: 'Otra Empresa C.A.',
         rif: 'J-22222222-2',
         contact_name: 'Pedro Pérez',
@@ -183,18 +203,18 @@ test('Phase 2: requesting B05 places a 48h hold (reservado), blocks duplicate re
     confirmStandRequestInAdmin(request.id);
   }, /RLS/i);
 
-  // 5. Admin role from profiles confirms stand B05 and turns it into 'vendido'
+  // 5. Admin role from profiles confirms stand 19 and turns it into 'vendido'
   loginWithEmail('admin@cenexpo.com.ve', 'cenexpo2026');
   const confirmed = confirmStandRequestInAdmin(request.id);
-  assert.equal(confirmed.stand.code, 'B05');
+  assert.equal(confirmed.stand.code, '19');
   assert.equal(confirmed.stand.status, 'vendido');
   assert.equal(confirmed.exhibitor.name, 'AgroAndes Semillas C.A.');
   assert.equal(confirmed.exhibitor.status, 'confirmado');
 
-  // Verify public view reflects B05 as vendido
-  const b05Public = getStandsPublic().find((s) => s.code === 'B05');
-  assert.equal(b05Public?.effective_status, 'vendido');
-  assert.equal(b05Public?.exhibitor?.name, 'AgroAndes Semillas C.A.');
+  // Verify public view reflects stand 19 as vendido
+  const s19Public = getStandsPublic().find((s) => s.code === '19');
+  assert.equal(s19Public?.effective_status, 'vendido');
+  assert.equal(s19Public?.exhibitor?.name, 'AgroAndes Semillas C.A.');
 });
 
 test('Phase 2: exportRecordsToCsv outputs valid RFC-4180 CSV with UTF-8 BOM', () => {

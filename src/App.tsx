@@ -488,7 +488,7 @@ export default function App() {
                 Recorre la Expo · Patrón y Medidas de El Casino Militar
               </h2>
               <p className="mt-2 text-scale-16 text-[#1F2421]/85">
-                Explora la planimetría exacta del Salón de Exposiciones (38,0 × 21,5 m con 51 stands numerados del 01 al 51, 7 mesas de negocios y tarima Show Bisnet) y las 8 zonas exteriores de Expoauto (100 m² a 170 m²).
+                Explora la planimetría exacta del Salón de Exposiciones (38,0 × 21,5 m con 41 stands numerados del 01 al 41, 6 mesas de negocios y área de Conferencias) y las 8 zonas exteriores de Expoauto (100 m² a 170 m²).
               </p>
             </div>
 
@@ -1273,7 +1273,7 @@ export default function App() {
                   alt="Fotografía real del Salón de Exposiciones del Casino Militar de La Grita"
                   badgeText="Foto Real · Casino Militar"
                   captionTitle="Salón de Exposiciones del Casino Militar de La Grita"
-                  captionDetail="Vista interior real de la nave principal donde se ubican los 51 stands (01 al 51) y la tarima Show Bisnet."
+                  captionDetail="Vista interior real de la nave principal donde se ubican los 41 stands (01 al 41) y el área de Conferencias."
                   aspectClass="aspect-[16/10]"
                 />
               </div>
