@@ -3,9 +3,14 @@ build/
 dist/
 dev-dist/
 .playwright-cli/
+.wrangler/
+bun.lock
+bun.lockb
 coverage/
 .DS_Store
 *.log
 .env*
 !.env.example
+
+
 
